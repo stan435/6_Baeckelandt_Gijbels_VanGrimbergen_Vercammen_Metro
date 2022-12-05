@@ -1,6 +1,7 @@
 package view.panels;
 
 
+import jxl.read.biff.BiffException;
 import model.MetroCard;
 import model.database.MetroCardDatabase;
 import javafx.collections.FXCollections;
@@ -23,12 +24,13 @@ public class MetroCardOverviewPane extends GridPane{
 	private ObservableList<MetroCard> metroCards;
 	private MetroCardDatabase metroCardDatabase = new MetroCardDatabase();
 
-	public MetroCardOverviewPane() throws IOException {
+	public MetroCardOverviewPane() throws IOException, BiffException {
 
 		this.setPadding(new Insets(5, 5, 5, 5));
 		this.setVgap(5);
 		this.setHgap(5);
 		this.add(new Label("List of Metro cards:"), 0, 0, 1, 1);
+		metroCardDatabase.setStrategy("excel");
 		metroCardDatabase.load();
 		table = new TableView<MetroCard>();
 		table.setMaxWidth(600);

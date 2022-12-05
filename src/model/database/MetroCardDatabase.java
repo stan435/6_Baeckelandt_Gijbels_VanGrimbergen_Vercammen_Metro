@@ -1,7 +1,9 @@
 package model.database;
 
+import jxl.read.biff.BiffException;
 import model.MetroCard;
-import model.database.utilities.MetroCardTekstReader;
+import model.database.LoadSaveStrategies.LoadSaveStrategy;
+import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,16 +12,22 @@ import java.util.*;
 
 public class MetroCardDatabase {
     private HashMap<Integer, MetroCard> metrocards = new HashMap<>();
-    private String fileName = "./src/metrocards.txt";
+    private String fileName = "./bestanden/metrocards.xls";
+    private LoadSaveStrategy loadSaveStrategy;
 
-    public void load() throws IOException {
+    public void setStrategy(String naam){
         try{
-            metrocards = (HashMap<Integer, MetroCard>) new MetroCardTekstReader().load(new File(fileName));
+            this.loadSaveStrategy =  LoadSaveStrategyFactory.getStrategy(naam);
 
-        }catch (FileNotFoundException e){
-            System.out.println("??");
-
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
         }
+    }
+
+    public void load() throws IOException, BiffException {
+
+        //metrocards = (HashMap<Integer, MetroCard>) new MetroCardTekstReader().load(new File(fileName));
+        metrocards = (HashMap<Integer, MetroCard>) loadSaveStrategy.load(new File(fileName));
 
     }
     public ArrayList<MetroCard> getMetroCardList(){
