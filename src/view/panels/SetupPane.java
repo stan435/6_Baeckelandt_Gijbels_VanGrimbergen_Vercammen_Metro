@@ -31,7 +31,8 @@ public class SetupPane extends GridPane {
     private ClickHandler clickHandler;
 
 
-    public SetupPane(){
+    public SetupPane() {
+
 
         clickHandler = new ClickHandler();
         strategy = new ChoiceBox<>();
@@ -40,28 +41,20 @@ public class SetupPane extends GridPane {
         strategy.setValue("Tekst");
         save = new Button("save");
         save.setOnAction(clickHandler);
-        this.setVgap(10);
+        save.setId("buttonSave");
         this.getChildren().add(strategy);
         this.getChildren().add(save);
     }
 
-    private class ClickHandler implements EventHandler<ActionEvent>{
+    private class ClickHandler implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent event) {
             Properties properties = new Properties();
             FileOutputStream os = null;
             try {
-                os = new FileOutputStream("sdgsdgs");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                properties.store(os,"ok");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
+                os = new FileOutputStream("./bestanden/settings.properties");
+                properties.store(os, strategy.getValue());
                 os.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -69,3 +62,4 @@ public class SetupPane extends GridPane {
         }
     }
 }
+

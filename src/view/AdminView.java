@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.security.ntlm.Client;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +24,7 @@ public class AdminView {
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 		root.getChildren().add(borderPane);
+		scene.getStylesheets().add(AdminView.class.getResource("style.css").toExternalForm());
 		stage.setScene(scene);
 		stage.sizeToScene();			
 		stage.show();		
