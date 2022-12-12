@@ -30,8 +30,6 @@ public class MetroCardOverviewPane extends GridPane{
 		this.setVgap(5);
 		this.setHgap(5);
 		this.add(new Label("List of Metro cards:"), 0, 0, 1, 1);
-		metroCardDatabase.setStrategy("excel");
-		metroCardDatabase.load();
 		table = new TableView<MetroCard>();
 		table.setMaxWidth(600);
 		refresh();

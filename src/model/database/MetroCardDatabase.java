@@ -12,20 +12,19 @@ import java.util.*;
 
 public class MetroCardDatabase {
     private HashMap<Integer, MetroCard> metrocards = new HashMap<>();
-    private String fileName = "./bestanden/metrocards.xls";
+    private String fileName = "./bestanden/metrocards.txt";
     private LoadSaveStrategy loadSaveStrategy;
 
-    public void setStrategy(String naam){
+    public void setStrategy(){
         try{
-            this.loadSaveStrategy =  LoadSaveStrategyFactory.getStrategy(naam);
+            this.loadSaveStrategy =  LoadSaveStrategyFactory.getStrategy();
 
-        }catch (IllegalArgumentException e){
+        }catch (IllegalArgumentException | IOException e){
             System.out.println(e.getMessage());
         }
     }
 
     public void load() throws IOException, BiffException {
-
         //metrocards = (HashMap<Integer, MetroCard>) new MetroCardTekstReader().load(new File(fileName));
         metrocards = (HashMap<Integer, MetroCard>) loadSaveStrategy.load(new File(fileName));
 

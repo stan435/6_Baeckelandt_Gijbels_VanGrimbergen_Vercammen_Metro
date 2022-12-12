@@ -33,7 +33,7 @@ public class TekstLoadSaveTemplate<K,V> {
     }
 
     public String getKey(String[] tokens){
-        return tokens[1];
+        return tokens[0];
     }
 }
 
