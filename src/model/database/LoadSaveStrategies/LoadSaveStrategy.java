@@ -7,5 +7,5 @@ import java.io.IOException;
 import java.util.Map;
 
 public interface LoadSaveStrategy {
-    Map load(File file) throws IOException, BiffException;
+    Map load() throws IOException, BiffException;
 }

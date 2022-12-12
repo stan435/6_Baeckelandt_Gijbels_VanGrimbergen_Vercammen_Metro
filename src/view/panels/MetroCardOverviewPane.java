@@ -47,10 +47,6 @@ public class MetroCardOverviewPane extends GridPane{
 		colint2.setCellValueFactory(new PropertyValueFactory<MetroCard, Integer>("int2"));
 		table.getColumns().addAll(colId,colBuyDate,colint1,colint2);
 		this.getChildren().addAll(table);
-		Stage stage = new Stage();
-		Scene scene = new Scene(this);
-		stage.setScene(scene);
-		stage.show();
 	}
 
 		public void refresh() throws IOException {

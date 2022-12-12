@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class MetroCardsExcelLoadSaveStrategy extends ExcelLoadSaveTemplate implements LoadSaveStrategy {
     @Override
-    public Map load(File file) throws BiffException, IOException {
-        return super.load(file);
+    public Map load() throws BiffException, IOException {
+        return super.load(new File("bestanden/metrocards.xls"));
     }
 }

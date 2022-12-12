@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class MetroCardsTekstLoadSaveStrategy extends TekstLoadSaveTemplate implements LoadSaveStrategy {
     @Override
-    public Map load(File file) throws IOException {
-        return super.load(file);
+    public Map load() throws IOException {
+        return super.load(new File("bestanden/metrocards.txt"));
     }
 
 }
