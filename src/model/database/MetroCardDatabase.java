@@ -12,7 +12,6 @@ import java.util.*;
 
 public class MetroCardDatabase {
     private HashMap<Integer, MetroCard> metrocards = new HashMap<>();
-    private String fileName = "./bestanden/metrocards.txt";
     private LoadSaveStrategy loadSaveStrategy;
 
     public void setStrategy(){
@@ -26,7 +25,7 @@ public class MetroCardDatabase {
 
     public void load() throws IOException, BiffException {
         //metrocards = (HashMap<Integer, MetroCard>) new MetroCardTekstReader().load(new File(fileName));
-        metrocards = (HashMap<Integer, MetroCard>) loadSaveStrategy.load(new File(fileName));
+        metrocards = (HashMap<Integer, MetroCard>) loadSaveStrategy.load();
 
     }
     public ArrayList<MetroCard> getMetroCardList(){
