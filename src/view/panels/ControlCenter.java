@@ -35,13 +35,18 @@ public class ControlCenter extends GridPane {
     private Button open;
     private ClickHandler clickHandler;
     private MetroCardDatabase metroCardDatabase = new MetroCardDatabase();
-    private ControlCenterPaneController controlCenterPaneController = new ControlCenterPaneController();
 
-    public ControlCenter(){
+    public ControlCenter(ControlCenterPaneController controlCenterPaneController){
         clickHandler = new ClickHandler();
 
         open = new Button("Open Metro Station");
-        open.setOnAction(clickHandler);
+        open.setOnAction(event -> {
+            try {
+                controlCenterPaneController.openMetroStation();
+            } catch (BiffException | IOException e) {
+                e.printStackTrace();
+            }
+        });
         open.setAlignment(Pos.CENTER_RIGHT);
 
         this.getChildren().add(open);
@@ -53,13 +58,7 @@ private class ClickHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        try {
-            controlCenterPaneController.openMetroStation();
-        } catch (BiffException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
     }
 }

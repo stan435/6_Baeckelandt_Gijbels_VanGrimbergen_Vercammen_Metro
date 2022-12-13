@@ -14,12 +14,13 @@ import java.io.IOException;
 
 
 public class MetroMain extends Application {
+
 	@Override
 	public void start(Stage primaryStage) throws IOException, BiffException {
-		AdminView adminView = new AdminView();
+		MetroFacade metroFacade = new MetroFacade();
+		AdminView adminView = new AdminView(metroFacade);
 		MetroTicketView metroTicketView = new MetroTicketView();
 		MetroStationView metroStationView = new MetroStationView();
-		MetroFacade metroFacade = new MetroFacade();
 	}
 	
 	public static void main(String[] args) {

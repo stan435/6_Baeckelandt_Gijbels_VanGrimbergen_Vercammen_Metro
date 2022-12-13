@@ -24,7 +24,6 @@ import java.util.ArrayList;
 public class MetroCardOverviewPane extends GridPane{
 	private TableView<MetroCard> table;
 	private ObservableList<MetroCard> metroCards;
-	private MetroCardOverviewPaneController metroCardOverviewPaneController = new MetroCardOverviewPaneController();
 
 	public MetroCardOverviewPane() throws IOException, BiffException {
 		this.setPadding(new Insets(5, 5, 5, 5));

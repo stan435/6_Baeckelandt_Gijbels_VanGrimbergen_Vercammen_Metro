@@ -7,20 +7,21 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jxl.read.biff.BiffException;
+import model.MetroFacade;
 
 import java.io.IOException;
 
 public class AdminView {
-	private Stage stage = new Stage();		
+	private Stage stage = new Stage();
 		
-	public AdminView() throws IOException, BiffException {
+	public AdminView(MetroFacade metroFacade) throws IOException, BiffException {
 		stage.setTitle("ADMIN VIEW");
 		stage.initStyle(StageStyle.UTILITY);
 		stage.setX(660);
 		stage.setY(5);
 		Group root = new Group();
 		Scene scene = new Scene(root, 690, 680);
-		BorderPane borderPane = new AdminMainPane();
+		BorderPane borderPane = new AdminMainPane(metroFacade);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 		root.getChildren().add(borderPane);
