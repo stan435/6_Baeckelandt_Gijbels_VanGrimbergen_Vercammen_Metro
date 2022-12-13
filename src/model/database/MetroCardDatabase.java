@@ -8,6 +8,8 @@ import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.*;
 
 public class MetroCardDatabase {
@@ -36,5 +38,27 @@ public class MetroCardDatabase {
 
     public ArrayList<Integer> getMetroCardIDs() {
         return new ArrayList<>(metrocards.keySet());
+    }
+
+    public int getNextID(){
+        return metrocards.size()+1;
+    }
+
+    public void addMetroCard(){
+        MetroCard metroCard=new MetroCard(getNextID(), YearMonth.now(),2,15);
+        metrocards.put(getNextID(),metroCard);
+        try {
+            save();
+        } catch (BiffException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (WriteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void save() throws BiffException, IOException, WriteException {
+        loadSaveStrategy.save(getMetroCardList());
     }
 }

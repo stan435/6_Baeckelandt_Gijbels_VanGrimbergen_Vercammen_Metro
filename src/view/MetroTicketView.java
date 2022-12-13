@@ -34,7 +34,8 @@ public class MetroTicketView {
 
 
 
-	public MetroTicketView() throws BiffException, IOException {
+	public MetroTicketView(MetroTicketViewController metroTicketViewController) throws BiffException, IOException {
+		metroTicketViewController.setView(this);
 		stage.setTitle("METROTICKET VIEW");
 		stage.initStyle(StageStyle.UTILITY);
 		stage.setX(5);
@@ -106,6 +107,14 @@ public class MetroTicketView {
 		deel2.setSpacing(10);
 		setStyle(deel2);
 		vBox.getChildren().add(deel2);
+
+		addCard.setOnAction(event -> {
+			try {
+				metroTicketViewController.buyMetroCards();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	public void setStyle(VBox vBox){
 		vBox.setStyle("-fx-border-color: black;-fx-border-radius: 3px ;-fx-border-width: 1px; -fx-border-style: solid; -fx-padding: 10px 200px 10px 10px; -fx-background-color: #C6CBCE;");

@@ -16,6 +16,7 @@ public class MetroCardOverviewPaneController implements MetroObserver {
         this.metroFacade = metroFacade;
         this.metroCardOverviewPane = metroCardOverviewPane;
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
+        metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
     }
 
     @Override
