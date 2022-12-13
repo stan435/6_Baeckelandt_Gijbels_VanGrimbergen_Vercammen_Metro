@@ -40,7 +40,7 @@ public class MetroTicketView {
 		stage.setX(5);
 		stage.setY(5);
 		Group root = new Group();
-		Scene scene = new Scene(root, 650, 350);			
+		Scene scene = new Scene(root, 650, 400);
 		stage.setScene(scene);
 		stage.sizeToScene();			
 		stage.show();

@@ -1,5 +1,7 @@
 package view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -32,9 +34,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MetroStationView {
-	private ChoiceBox<String> idsgate1 = new ChoiceBox<>();
-	private ChoiceBox<String> idsgate2 = new ChoiceBox<>();
-	private ChoiceBox<String> idsgate3 = new ChoiceBox<>();
+	private ObservableList<Integer> metroCardsIDs;
+	private ChoiceBox<Integer> idsgate1 = new ChoiceBox<>();
+	private ChoiceBox<Integer> idsgate2 = new ChoiceBox<>();
+	private ChoiceBox<Integer> idsgate3 = new ChoiceBox<>();
 	private Button scanMetrocardgate1 = new Button("Scan Metrocard");
 	private Button scanMetrocardgate2 = new Button("Scan Metrocard");
 	private Button scanMetrocardgate3 = new Button("Scan Metrocard");
@@ -93,6 +96,10 @@ public class MetroStationView {
 	}
 
 	public void updateIds(ArrayList<Integer> list){
+			metroCardsIDs = FXCollections.observableArrayList(list);
+			idsgate1.setItems(metroCardsIDs);
+			idsgate2.setItems(metroCardsIDs);
+			idsgate3.setItems(metroCardsIDs);
 
 	}
 

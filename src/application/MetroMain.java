@@ -1,5 +1,6 @@
 package application;
 	
+import controller.MetroStationViewController;
 import controller.MetroTicketViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -21,8 +22,9 @@ public class MetroMain extends Application {
 		MetroFacade metroFacade = new MetroFacade();
 		AdminView adminView = new AdminView(metroFacade);
 		MetroTicketView metroTicketView = new MetroTicketView();
-		MetroTicketViewController metroTicketViewController = new MetroTicketViewController(metroFacade,metroTicketView);
 		MetroStationView metroStationView = new MetroStationView();
+		MetroTicketViewController metroTicketViewController = new MetroTicketViewController(metroFacade,metroTicketView);
+		MetroStationViewController metroStationViewController = new MetroStationViewController(metroFacade, metroStationView);
 	}
 	
 	public static void main(String[] args) {
