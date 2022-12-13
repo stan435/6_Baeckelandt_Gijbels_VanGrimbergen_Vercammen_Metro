@@ -7,9 +7,12 @@ import model.MetroObserver;
 
 import java.io.IOException;
 
-public class ControlCenterPaneController implements MetroObserver {
+public class ControlCenterPaneController  {
 
     MetroFacade metroFacade = new MetroFacade();
+
+    /*
+
 
     public ControlCenterPaneController(){
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
@@ -22,7 +25,11 @@ public class ControlCenterPaneController implements MetroObserver {
         }
     }
 
+     */
+
+
     public void openMetroStation() throws BiffException, IOException {
         metroFacade.openMetroStation();
     }
+
 }

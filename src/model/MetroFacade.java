@@ -15,11 +15,11 @@ public class MetroFacade implements Subject {
     private Map<MetroEventsEnum, List<MetroObserver>> observers = new HashMap<>();
     private MetroCardDatabase metroCardDatabase = new MetroCardDatabase();
 
+
     public MetroFacade(){
         for (MetroEventsEnum e : MetroEventsEnum.values()) {
             observers.put(e, new ArrayList<MetroObserver>());
         }
-
     }
 
     public void openMetroStation() throws BiffException, IOException {
@@ -40,6 +40,7 @@ public class MetroFacade implements Subject {
     @Override
     public void registerObeserver(MetroEventsEnum e, MetroObserver o) {
         observers.get(e).add(o);
+        String a = "";
     }
 
     @Override

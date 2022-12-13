@@ -1,6 +1,7 @@
 package view.panels;
 
 
+import controller.MetroCardOverviewPaneController;
 import jxl.read.biff.BiffException;
 import model.MetroCard;
 import model.database.MetroCardDatabase;
@@ -23,10 +24,9 @@ import java.util.ArrayList;
 public class MetroCardOverviewPane extends GridPane{
 	private TableView<MetroCard> table;
 	private ObservableList<MetroCard> metroCards;
-	private MetroCardDatabase metroCardDatabase = new MetroCardDatabase();
+	private MetroCardOverviewPaneController metroCardOverviewPaneController = new MetroCardOverviewPaneController();
 
 	public MetroCardOverviewPane() throws IOException, BiffException {
-
 		this.setPadding(new Insets(5, 5, 5, 5));
 		this.setVgap(5);
 		this.setHgap(5);

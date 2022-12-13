@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class MetroCardOverviewPaneController implements MetroObserver {
     MetroFacade metroFacade = new MetroFacade();
-    MetroCardOverviewPane metroCardOverviewPane = new MetroCardOverviewPane();
+    MetroCardOverviewPane metroCardOverviewPane;
 
     public MetroCardOverviewPaneController() throws BiffException, IOException {
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
@@ -20,7 +20,6 @@ public class MetroCardOverviewPaneController implements MetroObserver {
     public void update(MetroEventsEnum e) throws IOException {
         if(MetroEventsEnum.OPEN_METROSTATION.equals(e)){
             metroCardOverviewPane.updateMetrocardList(metroFacade.getMetroCardList());
-
         }
     }
 
