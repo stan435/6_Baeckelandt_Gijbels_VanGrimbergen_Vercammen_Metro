@@ -12,18 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 public class MetroFacade implements Subject {
-    private Map<MetroEventsEnum, List<MetroObserver>> observers;
+    private final Map<MetroEventsEnum, List<MetroObserver>> observers = new HashMap<>();
     private MetroCardDatabase metroCardDatabase = new MetroCardDatabase();
 
 
     public MetroFacade(){
-        if (observers == null) {
-            this.observers = new HashMap<>();
             for (MetroEventsEnum e : MetroEventsEnum.values()) {
                 observers.put(e, new ArrayList<MetroObserver>());
             }
         }
-    }
 
 
     public void openMetroStation() throws BiffException, IOException {

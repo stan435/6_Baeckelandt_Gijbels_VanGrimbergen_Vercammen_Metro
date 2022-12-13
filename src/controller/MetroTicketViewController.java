@@ -11,17 +11,17 @@ import java.io.IOException;
 public class MetroTicketViewController implements MetroObserver {
 
     private final MetroFacade metroFacade;
-    private final MetroTicketView metroTicketView;
+    private MetroTicketView metroTicketView;
 
-    public MetroTicketViewController(MetroFacade metroFacade, MetroTicketView metroTicketView) throws BiffException, IOException {
+    public MetroTicketViewController(MetroFacade metroFacade) throws BiffException, IOException {
         this.metroFacade = metroFacade;
-        this.metroTicketView = metroTicketView;
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
         metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
     }
 
-    public void getMetroCardIDs() {
-        metroFacade.getMetroCardIDList();
+
+    public void setView(MetroTicketView metroTicketView){
+        this.metroTicketView = metroTicketView;
     }
 
     @Override
