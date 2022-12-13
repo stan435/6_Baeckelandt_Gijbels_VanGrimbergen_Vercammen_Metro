@@ -1,5 +1,7 @@
 package view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -32,7 +34,6 @@ public class MetroTicketView {
 		VBox vBox = new VBox();
 		vBox.setPadding(new Insets(10, 10, 10, 10));
 		vBox.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-border-style: solid; -fx-padding: 10px 200px 10px 10px; -fx-background-color: #C6CBCE;");
-		vBox.setAlignment(Pos.TOP_CENTER);
 
 		vBox.getChildren().add(new Button("NEW METRO CARD"));
 		vBox.getChildren().add(new Label("Metro card price is 15 euros - 2 free rides included"));
