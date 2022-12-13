@@ -33,4 +33,8 @@ public class MetroCardDatabase {
         ArrayList<MetroCard> lijst = new ArrayList<MetroCard>(values);
         return  lijst;
     }
+
+    public ArrayList<Integer> getMetroCardIDs() {
+        return new ArrayList<>(metrocards.keySet());
+    }
 }

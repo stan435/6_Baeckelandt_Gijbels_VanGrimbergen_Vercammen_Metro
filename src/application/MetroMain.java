@@ -1,5 +1,6 @@
 package application;
 	
+import controller.MetroTicketViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
@@ -20,6 +21,7 @@ public class MetroMain extends Application {
 		MetroFacade metroFacade = new MetroFacade();
 		AdminView adminView = new AdminView(metroFacade);
 		MetroTicketView metroTicketView = new MetroTicketView();
+		MetroTicketViewController metroTicketViewController = new MetroTicketViewController(metroFacade,metroTicketView);
 		MetroStationView metroStationView = new MetroStationView();
 	}
 	
