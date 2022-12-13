@@ -1,5 +1,6 @@
 package view;
 
+import controller.MetroStationViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -51,7 +52,8 @@ public class MetroStationView {
 
 	private Stage stage = new Stage();
 
-	public MetroStationView(){
+	public MetroStationView(MetroStationViewController metroStationViewController){
+		metroStationViewController.setView(this);
 		stage.setTitle("METRO STATION VIEW");
 		stage.initStyle(StageStyle.UTILITY);
 		stage.setX(5);

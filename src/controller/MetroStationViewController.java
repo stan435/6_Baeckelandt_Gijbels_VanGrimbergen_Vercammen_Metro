@@ -11,11 +11,10 @@ import java.io.IOException;
 
 public class MetroStationViewController implements MetroObserver {
     private final MetroFacade metroFacade;
-    private final MetroStationView metroStationView;
+    private MetroStationView metroStationView;
 
-    public MetroStationViewController(MetroFacade metroFacade, MetroStationView metroStationView) throws BiffException, IOException {
+    public MetroStationViewController(MetroFacade metroFacade) throws BiffException, IOException {
         this.metroFacade = metroFacade;
-        this.metroStationView = metroStationView;
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
         metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
     }
@@ -26,5 +25,9 @@ public class MetroStationViewController implements MetroObserver {
         if (MetroEventsEnum.OPEN_METROSTATION.equals(e)) {
             metroStationView.updateIds(metroFacade.getMetroCardIDList());
         }
+    }
+
+    public void setView(MetroStationView metroStationView){
+        this.metroStationView = metroStationView;
     }
 }

@@ -33,7 +33,6 @@ public class MetroTicketView {
 	private Label infoPrice;
 
 
-
 	public MetroTicketView(MetroTicketViewController metroTicketViewController) throws BiffException, IOException {
 		metroTicketViewController.setView(this);
 		stage.setTitle("METROTICKET VIEW");
