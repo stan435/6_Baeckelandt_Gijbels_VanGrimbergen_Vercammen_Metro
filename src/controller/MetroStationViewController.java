@@ -17,6 +17,7 @@ public class MetroStationViewController implements MetroObserver {
         this.metroFacade = metroFacade;
         this.metroStationView = metroStationView;
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
+        metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
     }
 
 

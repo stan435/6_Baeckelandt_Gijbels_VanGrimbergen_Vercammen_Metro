@@ -41,6 +41,11 @@ public class MetroFacade implements Subject {
         return metroCardDatabase.getMetroCardIDs();
     }
 
+    public void buyMetroCards() throws IOException {
+        metroCardDatabase.setStrategy(LoadSaveStrategyFactory.getStrategy());
+        metroCardDatabase.addMetroCard();
+    }
+
     @Override
     public void registerObeserver(MetroEventsEnum e, MetroObserver o) {
         observers.get(e).add(o);
@@ -53,6 +58,7 @@ public class MetroFacade implements Subject {
             o.update(e);
         }
     }
+
 
 
 }

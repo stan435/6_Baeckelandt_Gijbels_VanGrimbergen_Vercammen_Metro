@@ -17,6 +17,7 @@ public class MetroTicketViewController implements MetroObserver {
         this.metroFacade = metroFacade;
         this.metroTicketView = metroTicketView;
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
+        metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
     }
 
     public void getMetroCardIDs() {
@@ -28,6 +29,10 @@ public class MetroTicketViewController implements MetroObserver {
         if(MetroEventsEnum.OPEN_METROSTATION.equals(e)){
             metroTicketView.updateDropdownIDs(metroFacade.getMetroCardIDList());
         }
+    }
+
+    public void buyMetroCards() throws IOException {
+        metroFacade.buyMetroCards();
     }
 
 }
