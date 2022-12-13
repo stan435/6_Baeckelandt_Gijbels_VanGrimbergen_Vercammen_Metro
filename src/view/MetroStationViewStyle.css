@@ -1,0 +1,9 @@
+.vbox {
+    -fx-spacing: 10;
+    -fx-padding: 10 10 10 10;
+    -fx-background-color: #c5eee4;
+    -fx-pref-height: 250;
+    -fx-pref-width: 200;
+    -fx-border-radius: 1px;
+    -fx-border-color: black;
+}
