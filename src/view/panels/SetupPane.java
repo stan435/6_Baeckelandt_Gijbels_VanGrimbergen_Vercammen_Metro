@@ -67,9 +67,7 @@ public class SetupPane extends VBox {
                 FileOutputStream naam = new FileOutputStream("./bestanden/settings.properties");
                 properties.store(naam,"Strategy");
                 os.close();
-                metroCardDatabase.setStrategy();
-                metroCardDatabase.load();
-            } catch (IOException | BiffException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

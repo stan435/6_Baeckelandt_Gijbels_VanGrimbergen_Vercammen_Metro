@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.YearMonth;
+import java.util.ArrayList;
 
 
 public class MetroCardOverviewPane extends GridPane{
@@ -32,7 +33,6 @@ public class MetroCardOverviewPane extends GridPane{
 		this.add(new Label("List of Metro cards:"), 0, 0, 1, 1);
 		table = new TableView<MetroCard>();
 		table.setMaxWidth(600);
-		refresh();
 		TableColumn<MetroCard, Integer> colId = new TableColumn<MetroCard, Integer>("MetroCard id");
 		colId.setMinWidth(50);
 		colId.setCellValueFactory(new PropertyValueFactory<MetroCard, Integer>("id"));
@@ -49,8 +49,8 @@ public class MetroCardOverviewPane extends GridPane{
 		this.getChildren().addAll(table);
 	}
 
-		public void refresh() throws IOException {
-			metroCards = FXCollections.observableArrayList(metroCardDatabase.getMetroCardList());
+		public void updateMetrocardList(ArrayList<MetroCard> list) throws IOException {
+			metroCards = FXCollections.observableArrayList(list);
 			table.setItems(metroCards);
 			table.refresh();
 		}

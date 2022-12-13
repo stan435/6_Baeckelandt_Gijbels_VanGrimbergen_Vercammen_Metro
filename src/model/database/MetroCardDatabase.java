@@ -14,11 +14,11 @@ public class MetroCardDatabase {
     private HashMap<Integer, MetroCard> metrocards = new HashMap<>();
     private LoadSaveStrategy loadSaveStrategy;
 
-    public void setStrategy(){
+    public void setStrategy(LoadSaveStrategy loadSaveStrategy){
         try{
-            this.loadSaveStrategy =  LoadSaveStrategyFactory.getStrategy();
+            this.loadSaveStrategy =  loadSaveStrategy;
 
-        }catch (IllegalArgumentException | IOException e){
+        }catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
     }
