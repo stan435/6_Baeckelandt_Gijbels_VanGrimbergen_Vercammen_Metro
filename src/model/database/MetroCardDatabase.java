@@ -46,7 +46,7 @@ public class MetroCardDatabase {
     }
 
     public void addMetroCard(){
-        MetroCard metroCard=new MetroCard(getNextID(), YearMonth.now(),2,15);
+        MetroCard metroCard=new MetroCard(getNextID(), YearMonth.now(),2,0);
         metrocards.put(getNextID(),metroCard);
         try {
             save();
@@ -57,6 +57,10 @@ public class MetroCardDatabase {
         } catch (WriteException e) {
             e.printStackTrace();
         }
+    }
+
+    public MetroCard getMetroCard(String id){
+        return metrocards.get(id);
     }
 
     public void save() throws BiffException, IOException, WriteException {

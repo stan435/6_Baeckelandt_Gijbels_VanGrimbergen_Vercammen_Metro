@@ -1,30 +1,29 @@
 package model;
 
 
-import java.time.Month;
 import java.time.YearMonth;
 
 public class MetroCard {
-    private int id,int1,int2;
+    private int id, beschikbaar, gebruikt;
     private YearMonth date;
 
-    public MetroCard(int id, YearMonth date, int int1, int int2){
+    public MetroCard(int id, YearMonth date, int beschikbaar, int gebruikt){
         this.id = id;
         this.date = date;
-        this.int1 = int1;
-        this.int2 = int2;
+        this.beschikbaar = beschikbaar;
+        this.gebruikt = gebruikt;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getInt1() {
-        return int1;
+    public int getBeschikbaar() {
+        return beschikbaar;
     }
 
-    public int getInt2() {
-        return int2;
+    public int getGebruikt() {
+        return gebruikt;
     }
 
     public YearMonth getDate() {
@@ -35,12 +34,12 @@ public class MetroCard {
         this.id = id;
     }
 
-    public void setInt1(int int1) {
-        this.int1 = int1;
+    public void setBeschikbaar(int beschikbaar) {
+        this.beschikbaar = beschikbaar;
     }
 
-    public void setInt2(int int2) {
-        this.int2 = int2;
+    public void setGebruikt(int gebruikt) {
+        this.gebruikt = gebruikt;
     }
 
     public void setDate(YearMonth date) {

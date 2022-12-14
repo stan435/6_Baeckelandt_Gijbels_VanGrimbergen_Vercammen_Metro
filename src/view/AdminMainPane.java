@@ -4,6 +4,8 @@ package view;
 import application.MetroMain;
 import controller.ControlCenterPaneController;
 import controller.MetroCardOverviewPaneController;
+import controller.MetroStationViewController;
+import controller.SetupPaneController;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
@@ -17,12 +19,13 @@ import java.io.IOException;
 
 public class AdminMainPane extends BorderPane {
 	public AdminMainPane(MetroFacade metroFacade) throws IOException, BiffException {
-	    TabPane tabPane = new TabPane(); 	    
-        MetroCardOverviewPane metroCardOverviewPane = new MetroCardOverviewPane();
-
+	    TabPane tabPane = new TabPane();
         ControlCenterPaneController controlCenterPaneController = new ControlCenterPaneController(metroFacade);
-        MetroCardOverviewPaneController metroCardOverviewPaneController = new MetroCardOverviewPaneController(metroFacade, metroCardOverviewPane);
-        SetupPane setupPane = new SetupPane();
+        SetupPaneController setupPaneController = new SetupPaneController(metroFacade);
+        MetroCardOverviewPaneController metroCardOverviewPaneController = new MetroCardOverviewPaneController(metroFacade);
+
+        SetupPane setupPane = new SetupPane(setupPaneController);
+        MetroCardOverviewPane metroCardOverviewPane = new MetroCardOverviewPane(metroCardOverviewPaneController);
         ControlCenter controlCenter = new ControlCenter(controlCenterPaneController);
 	//maak een controlCenterPane aan
 	//maak een setupPane aan

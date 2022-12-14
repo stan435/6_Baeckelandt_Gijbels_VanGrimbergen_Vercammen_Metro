@@ -2,6 +2,7 @@ package application;
 	
 import controller.MetroStationViewController;
 import controller.MetroTicketViewController;
+import controller.SetupPaneController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import jxl.read.biff.BiffException;

@@ -1,6 +1,7 @@
 package controller;
 
 import jxl.read.biff.BiffException;
+import model.MetroCard;
 import model.MetroEventsEnum;
 import model.MetroFacade;
 import model.MetroObserver;
@@ -33,6 +34,14 @@ public class MetroTicketViewController implements MetroObserver {
 
     public void buyMetroCards() throws IOException, BiffException {
         metroFacade.buyMetroCards();
+    }
+
+    public void getPrice(Boolean is26Min, Boolean is64Plus, Boolean isStudent, MetroCard metroCard, int rides) throws IOException {
+        metroFacade.getPrice(is26Min,is64Plus,isStudent,metroCard, rides);
+    }
+
+    public MetroCard getMetrocard(String id){
+        return metroFacade.getMetroCard(id);
     }
 
 }

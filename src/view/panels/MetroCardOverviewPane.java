@@ -25,7 +25,8 @@ public class MetroCardOverviewPane extends GridPane{
 	private TableView<MetroCard> table;
 	private ObservableList<MetroCard> metroCards;
 
-	public MetroCardOverviewPane() throws IOException, BiffException {
+	public MetroCardOverviewPane(MetroCardOverviewPaneController metroCardOverviewPaneController) throws IOException, BiffException {
+		metroCardOverviewPaneController.setView(this);
 		this.setPadding(new Insets(5, 5, 5, 5));
 		this.setVgap(5);
 		this.setHgap(5);
@@ -38,12 +39,12 @@ public class MetroCardOverviewPane extends GridPane{
 		TableColumn<MetroCard, YearMonth> colBuyDate = new TableColumn<MetroCard, YearMonth>("Buy Date");
 		colBuyDate.setMinWidth(150);
 		colBuyDate.setCellValueFactory(new PropertyValueFactory<MetroCard, YearMonth>("date"));
-		TableColumn<MetroCard, Integer> colint1 = new TableColumn<MetroCard, Integer>("geen idee");
+		TableColumn<MetroCard, Integer> colint1 = new TableColumn<MetroCard, Integer>("Beschikbaar");
 		colint1.setMinWidth(150);
-		colint1.setCellValueFactory(new PropertyValueFactory<MetroCard, Integer>("int1"));
-		TableColumn<MetroCard, Integer> colint2 = new TableColumn<MetroCard, Integer>("geen idee");
+		colint1.setCellValueFactory(new PropertyValueFactory<MetroCard, Integer>("beschikbaar"));
+		TableColumn<MetroCard, Integer> colint2 = new TableColumn<MetroCard, Integer>("Gebruikt");
 		colint2.setMinWidth(150);
-		colint2.setCellValueFactory(new PropertyValueFactory<MetroCard, Integer>("int2"));
+		colint2.setCellValueFactory(new PropertyValueFactory<MetroCard, Integer>("gebruikt"));
 		table.getColumns().addAll(colId,colBuyDate,colint1,colint2);
 		this.getChildren().addAll(table);
 	}

@@ -2,14 +2,18 @@ package model;
 
 import controller.ControlCenterPaneController;
 import jxl.read.biff.BiffException;
+import model.TicketpriceDecorator.TicketPrice;
+import model.TicketpriceDecorator.TicketPriceDiscountEnum;
+import model.TicketpriceDecorator.TicketPriceFactory;
 import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
 import model.database.MetroCardDatabase;
+import sun.security.util.AuthResources_zh_CN;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.InputStream;
+import java.util.*;
 
 public class MetroFacade implements Subject {
     private final Map<MetroEventsEnum, List<MetroObserver>> observers = new HashMap<>();
@@ -44,7 +48,37 @@ public class MetroFacade implements Subject {
         notifyObservers(MetroEventsEnum.BUY_METROCARD);
     }
 
-    @Override
+    public double getPrice(Boolean is26Min, Boolean is64Plus, Boolean isStudent, MetroCard metroCard, int rides) throws IOException {
+        ArrayList<String> list = getMetroTicketDiscountList();
+        if(!list.contains(TicketPriceDiscountEnum.AGE64PLUSDISCOUNT.toString())){
+            is64Plus = false;
+        }
+        if(!list.contains(TicketPriceDiscountEnum.STUDENTDISCOUNT.toString())){
+            isStudent = false;
+        }
+        TicketPrice ticketPrice = TicketPriceFactory.createTicketPrice(is26Min,is64Plus,isStudent,metroCard, rides);
+         return 0;
+    }
+
+    public ArrayList<String> getMetroTicketDiscountList() throws IOException {
+        ArrayList<String> list = new ArrayList<>();
+        Properties properties = new Properties();
+        InputStream is = new FileInputStream("./bestanden/settings.properties");
+        properties.load(is);
+        String name = properties.getProperty("discount");
+        String[] list2 = name.split(",");
+        for (int i = 0; i < list2.length; i++) {
+            list.add(list2[i]);
+        }
+        return list;
+    }
+
+    public MetroCard getMetroCard(String id){
+        return metroCardDatabase.getMetroCard(id);
+    }
+
+
+        @Override
     public void registerObeserver(MetroEventsEnum e, MetroObserver o) {
         observers.get(e).add(o);
         String a = "";

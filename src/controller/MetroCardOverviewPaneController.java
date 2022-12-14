@@ -4,19 +4,24 @@ import jxl.read.biff.BiffException;
 import model.MetroEventsEnum;
 import model.MetroFacade;
 import model.MetroObserver;
+import view.MetroStationView;
 import view.panels.MetroCardOverviewPane;
 
 import java.io.IOException;
 
 public class MetroCardOverviewPaneController implements MetroObserver {
     private final MetroFacade metroFacade;
-    private final MetroCardOverviewPane metroCardOverviewPane;
+    private MetroCardOverviewPane metroCardOverviewPane;
 
-    public MetroCardOverviewPaneController(MetroFacade metroFacade, MetroCardOverviewPane metroCardOverviewPane) throws BiffException, IOException {
+    public MetroCardOverviewPaneController(MetroFacade metroFacade) throws BiffException, IOException {
         this.metroFacade = metroFacade;
-        this.metroCardOverviewPane = metroCardOverviewPane;
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
         metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
+    }
+
+    public void setView(MetroCardOverviewPane metroCardOverviewPane){
+        this.metroCardOverviewPane = metroCardOverviewPane;
+
     }
 
     @Override

@@ -4,7 +4,6 @@ import jxl.write.WriteException;
 import model.MetroCard;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +29,7 @@ public class TekstLoadSaveTemplate<K,V> {
     public void save(File file, ArrayList<MetroCard> args) throws BiffException, WriteException, IOException {
         ArrayList<String> list = new ArrayList<>();
         for(int i = 0; i < args.size();i++) {
-            list.add(args.get(i).getId() + ";" + args.get(i).getDate() + ";" + args.get(i).getInt1() + ";" + args.get(i).getInt2() + "\n" );
+            list.add(args.get(i).getId() + ";" + args.get(i).getDate() + ";" + args.get(i).getBeschikbaar() + ";" + args.get(i).getGebruikt() + "\n" );
         }
         FileWriter writer = new FileWriter(file);
         for(String str: list) {

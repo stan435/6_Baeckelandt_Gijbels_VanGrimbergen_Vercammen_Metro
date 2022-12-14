@@ -6,7 +6,6 @@ import model.MetroCard;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.spec.ECField;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,8 +21,8 @@ public class ExcelLoadSaveTemplate {
                 list.add(new ArrayList<>());
                 list.get(i).add(String.valueOf(args.get(i).getId()));
                 list.get(i).add(String.valueOf(args.get(i).getDate()));
-                list.get(i).add(String.valueOf(args.get(i).getInt1()));
-                list.get(i).add(String.valueOf(args.get(i).getInt2()));
+                list.get(i).add(String.valueOf(args.get(i).getBeschikbaar()));
+                list.get(i).add(String.valueOf(args.get(i).getGebruikt()));
 
 
            /*

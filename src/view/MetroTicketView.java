@@ -31,6 +31,7 @@ public class MetroTicketView {
 	private Button cancel;
 	private Label infoText;
 	private Label infoPrice;
+	private CheckBox checkBox;
 
 
 	public MetroTicketView(MetroTicketViewController metroTicketViewController) throws BiffException, IOException {
@@ -66,7 +67,7 @@ public class MetroTicketView {
 		hb2.setSpacing(10);
 
 		Label typeStudent = new Label("Higher education student?");
-		CheckBox checkBox = new CheckBox("Yes");
+		checkBox = new CheckBox("Yes");
 		HBox hb3 = new HBox(typeStudent,checkBox);
 		hb3.setSpacing(10);
 
@@ -74,18 +75,20 @@ public class MetroTicketView {
 
 		RadioButton rb1 = new RadioButton("Younger that 26 years");
 		rb1.setToggleGroup(group);
-		rb1.setSelected(true);
+
 
 		RadioButton rb2 = new RadioButton("older than 64 years");
 		rb2.setToggleGroup(group);
 
 		RadioButton rb3 = new RadioButton("between 26 and 64 years");
 		rb3.setToggleGroup(group);
+		rb3.setSelected(true);
 
 		HBox hb4 = new HBox(rb1,rb2,rb3);
 		hb4.setSpacing(10);
 
 		addRides = new Button("Add extra rides to metro card");
+
 
 		Label totalPrice = new Label("Total price:");
 		TextField priceField = new TextField();
@@ -111,6 +114,26 @@ public class MetroTicketView {
 			try {
 				metroTicketViewController.buyMetroCards();
 			} catch (IOException | BiffException e) {
+				e.printStackTrace();
+			}
+		});
+
+		addRides.setOnAction(event -> {
+			Boolean isStudent = false;
+			Boolean is26min = false;
+			Boolean is64Plus = false;
+			if(checkBox.isSelected()){
+				isStudent= true;
+			}
+			if(rb1.isSelected()){
+				is26min = true;
+			}
+			if(rb2.isSelected()){
+				is64Plus = true;
+			}
+			try {
+				metroTicketViewController.getPrice(is26min, is64Plus, isStudent,metroTicketViewController.getMetrocard(String.valueOf(IDs.getValue())), Integer.parseInt(numberField.getText()));
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		});
