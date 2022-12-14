@@ -13,6 +13,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Month;
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.*;
 
 public class MetroFacade implements Subject {
@@ -79,8 +82,17 @@ public class MetroFacade implements Subject {
     }
 
     public void scanMetroGate(String metroCardId, int gateId) throws BiffException, IOException {
-        String result = metroStation.scanMetroGate(gateId, getMetroCard(metroCardId)) + " " + metroCardId;
-        notifyObservers(MetroEventsEnum.SCAN_METROCARDS,result);
+        String result = metroStation.scanMetroGate(gateId, getMetroCard(metroCardId));
+        notifyObservers(MetroEventsEnum.SCAN_METROCARDS,result, Integer.toString(gateId));
+        if(getMetroCard(metroCardId).getDate().plusYears(1).isAfter(YearMonth.now()) || result.equals("Can not walk through closed gate")){
+            notifyObservers(MetroEventsEnum.Alert_CONTROLCENTER);
+        }
+    }
+
+    public void walkThroughGate(String metrocardId, int gateId) throws BiffException, IOException {
+        String result = metroStation.walkThroughGate(gateId, getMetroCard(metrocardId));
+        notifyObservers(MetroEventsEnum.WALKTHROUGHGATE, result, Integer.toString(gateId));
+
     }
 
 

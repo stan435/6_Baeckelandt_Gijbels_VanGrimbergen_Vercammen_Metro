@@ -18,6 +18,7 @@ public class MetroStationViewController implements MetroObserver {
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
         metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
         metroFacade.registerObeserver(MetroEventsEnum.SCAN_METROCARDS,this);
+        metroFacade.registerObeserver(MetroEventsEnum.WALKTHROUGHGATE,this);
     }
 
 
@@ -26,7 +27,7 @@ public class MetroStationViewController implements MetroObserver {
         if (MetroEventsEnum.OPEN_METROSTATION.equals(e) | MetroEventsEnum.BUY_METROCARD.equals(e)) {
             metroStationView.updateIds(metroFacade.getMetroCardIDList());
         }
-        if(MetroEventsEnum.SCAN_METROCARDS.equals(e)){
+        if(MetroEventsEnum.SCAN_METROCARDS.equals(e) | MetroEventsEnum.WALKTHROUGHGATE.equals(e)){
             metroStationView.updateStatText(args);
         }
     }
@@ -37,5 +38,9 @@ public class MetroStationViewController implements MetroObserver {
 
     public void scanMetroCard(String metroCardId, int gateId) throws BiffException, IOException {
         metroFacade.scanMetroGate(metroCardId, gateId);
+    }
+
+    public void walkThroughGate(String metrocardId, int gateId) throws BiffException, IOException {
+        metroFacade.walkThroughGate(metrocardId,gateId);
     }
 }

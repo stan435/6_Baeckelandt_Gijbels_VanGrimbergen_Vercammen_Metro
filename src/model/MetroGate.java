@@ -13,5 +13,9 @@ public class MetroGate {
        return stateContext.getState().scanMetroGate(stateContext, metroCard);
     }
 
+    public String walkThrough(MetroCard metroCard){
+        return  stateContext.getState().walkThroughGate(stateContext,metroCard);
+    }
+
 
 }
