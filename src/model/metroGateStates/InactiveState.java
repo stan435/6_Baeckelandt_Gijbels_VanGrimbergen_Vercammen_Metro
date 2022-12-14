@@ -8,4 +8,9 @@ public class InactiveState implements MetroGateState{
     public String scanMetroGate(StateContext stateContext, MetroCard metroCard) {
         return null;
     }
+
+    @Override
+    public String walkThroughGate(StateContext stateContext, MetroCard metroCard) {
+        return null;
+    }
 }

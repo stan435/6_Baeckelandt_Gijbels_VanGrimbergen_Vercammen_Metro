@@ -8,11 +8,16 @@ public class MetroStation {
 
     public MetroStation(){
         for (int i = 0; i < 3; i++) {
-            metroGates.put(i,new MetroGate());
+            metroGates.put(i+ 1,new MetroGate());
+
         }
     }
 
     public String scanMetroGate(int getid, MetroCard metroCard){
        return metroGates.get(getid).scan(metroCard);
+    }
+
+    public String walkThroughGate(int getid, MetroCard metrocard){
+        return metroGates.get(getid).walkThrough(metrocard);
     }
 }
