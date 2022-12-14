@@ -22,7 +22,7 @@ public class MetroStationViewController implements MetroObserver {
 
     @Override
     public void update(MetroEventsEnum e) throws BiffException, IOException {
-        if (MetroEventsEnum.OPEN_METROSTATION.equals(e)) {
+        if (MetroEventsEnum.OPEN_METROSTATION.equals(e) | MetroEventsEnum.BUY_METROCARD.equals(e)) {
             metroStationView.updateIds(metroFacade.getMetroCardIDList());
         }
     }

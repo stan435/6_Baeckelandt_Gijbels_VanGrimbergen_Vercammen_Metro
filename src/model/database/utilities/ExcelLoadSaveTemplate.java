@@ -16,15 +16,24 @@ public class ExcelLoadSaveTemplate {
     ExcelPlugin excelPlugin = new ExcelPlugin();
 
     public void save(File file, ArrayList<MetroCard> args) throws BiffException, WriteException, IOException {
-        ArrayList<ArrayList<String>> list = new ArrayList<>();
-        ArrayList<String> list2 = new ArrayList<>();
+        ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
+
         for(int i = 0; i < args.size();i++){
-            list2.add(String.valueOf(args.get(i).getId()));
-            list2.add(String.valueOf(args.get(i).getDate()));
-            list2.add(String.valueOf(args.get(i).getInt1()));
-            list2.add(String.valueOf(args.get(i).getInt2()));
-            list.add(list2);
-            list2.removeAll(list2);
+                list.add(new ArrayList<>());
+                list.get(i).add(String.valueOf(args.get(i).getId()));
+                list.get(i).add(String.valueOf(args.get(i).getDate()));
+                list.get(i).add(String.valueOf(args.get(i).getInt1()));
+                list.get(i).add(String.valueOf(args.get(i).getInt2()));
+
+
+           /*
+                list2.set(j,String.valueOf(args.get(i).getId()));
+                list2.set(j+1,String.valueOf(args.get(i).getDate()));
+                list2.set(j+2,String.valueOf(args.get(i).getInt1()));
+                list2.set(j+3,String.valueOf(args.get(i).getInt2()));
+                list.add(list2);
+
+            */
         }
 
         excelPlugin.save(file,list);

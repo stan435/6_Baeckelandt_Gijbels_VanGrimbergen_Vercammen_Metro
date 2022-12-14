@@ -38,9 +38,10 @@ public class MetroFacade implements Subject {
         return metroCardDatabase.getMetroCardIDs();
     }
 
-    public void buyMetroCards() throws IOException {
+    public void buyMetroCards() throws IOException, BiffException {
         metroCardDatabase.setStrategy(LoadSaveStrategyFactory.getStrategy());
         metroCardDatabase.addMetroCard();
+        notifyObservers(MetroEventsEnum.BUY_METROCARD);
     }
 
     @Override

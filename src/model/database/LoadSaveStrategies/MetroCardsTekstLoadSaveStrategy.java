@@ -18,7 +18,7 @@ public class MetroCardsTekstLoadSaveStrategy extends TekstLoadSaveTemplate imple
 
     @Override
     public void save(ArrayList<MetroCard> list) throws IOException, BiffException, WriteException {
-
+        super.save(new File("bestanden/metrocards.txt"), list);
     }
 
 }

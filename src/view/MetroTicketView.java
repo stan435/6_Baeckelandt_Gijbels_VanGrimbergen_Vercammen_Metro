@@ -110,7 +110,7 @@ public class MetroTicketView {
 		addCard.setOnAction(event -> {
 			try {
 				metroTicketViewController.buyMetroCards();
-			} catch (IOException e) {
+			} catch (IOException | BiffException e) {
 				e.printStackTrace();
 			}
 		});

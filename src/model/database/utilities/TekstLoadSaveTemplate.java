@@ -1,11 +1,12 @@
 package model.database.utilities;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import model.MetroCard;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,17 @@ public class TekstLoadSaveTemplate<K,V> {
         }
         return returnMap;
     }
+    public void save(File file, ArrayList<MetroCard> args) throws BiffException, WriteException, IOException {
+        ArrayList<String> list = new ArrayList<>();
+        for(int i = 0; i < args.size();i++) {
+            list.add(args.get(i).getId() + ";" + args.get(i).getDate() + ";" + args.get(i).getInt1() + ";" + args.get(i).getInt2() + "\n" );
+        }
+        FileWriter writer = new FileWriter(file);
+        for(String str: list) {
+            writer.write(str);
+        }
+        writer.close();
+}
 
     public MetroCard maakObject(String[] tokens){
         MetroCard metroCard = new MetroCard(Integer.parseInt(tokens[0]), YearMonth.parse(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
