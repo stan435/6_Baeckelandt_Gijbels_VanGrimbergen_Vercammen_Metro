@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface Subject {
     void registerObeserver(MetroEventsEnum e, MetroObserver o);
-    void notifyObservers(MetroEventsEnum e) throws BiffException, IOException;
+    void notifyObservers(MetroEventsEnum e, String ...args) throws BiffException, IOException;
 }

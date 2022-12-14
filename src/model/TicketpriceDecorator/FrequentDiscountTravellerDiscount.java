@@ -10,12 +10,18 @@ public class FrequentDiscountTravellerDiscount extends TicketPriceDiscountDecora
     }
 
     @Override
-    public String getPriceText() {
-        return null;
+    public String getPriceText(){
+        if(getAttribute().getGebruikt() > 50){
+            return super.getTicketPrice().getPriceText() + " - 0.20$ frequent traveller discount";
+        }
+        return super.getTicketPrice().getPriceText();
     }
 
     @Override
     public double getPrice() {
-        return 0;
+        if (getAttribute().getGebruikt() > 50) {
+            return super.getTicketPrice().getPrice() - (0.20 * getRides());
+        }
+        return super.getTicketPrice().getPrice();
     }
 }

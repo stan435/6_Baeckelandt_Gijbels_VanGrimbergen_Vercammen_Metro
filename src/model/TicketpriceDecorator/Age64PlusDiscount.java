@@ -11,11 +11,17 @@ public class Age64PlusDiscount extends TicketPriceDiscountDecorator{
 
     @Override
     public String getPriceText() {
-        return super.getTicketPrice().getPriceText() + "- 0.15$ 64+ age discount";
+        if(getIs64Plus()){
+            return super.getTicketPrice().getPriceText() + "- 0.15$ 64+ age discount";
+        }
+        return super.getTicketPrice().getPriceText();
     }
 
     @Override
     public double getPrice() {
-        return super.getTicketPrice().getPrice() - 0.15;
+        if(getIs64Plus()){
+            return super.getTicketPrice().getPrice() - (0.15 * getRides());
+        }
+        return super.getTicketPrice().getPrice();
     }
 }

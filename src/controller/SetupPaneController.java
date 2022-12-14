@@ -23,7 +23,7 @@ public class SetupPaneController implements MetroObserver {
     }
 
     @Override
-    public void update(MetroEventsEnum e) throws IOException {
+    public void update(MetroEventsEnum e, String ...args) throws IOException {
         if(MetroEventsEnum.OPEN_METROSTATION.equals(e)){
             setupPane.updateCheckBox();
         }

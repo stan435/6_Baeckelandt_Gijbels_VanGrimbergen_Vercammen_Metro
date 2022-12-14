@@ -10,11 +10,17 @@ public class StudentDiscount extends TicketPriceDiscountDecorator{
 
     @Override
     public String getPriceText() {
-        return super.getTicketPrice().getPriceText() + "- 0.25$ student discount";
+        if(getStudent()){
+            return super.getTicketPrice().getPriceText() + "- 0.25$ student discount";
+        }
+        return super.getTicketPrice().getPriceText();
     }
 
     @Override
     public double getPrice() {
-        return super.getTicketPrice().getPrice() - 0.25;
+        if(getStudent()){
+            return super.getTicketPrice().getPrice() - (0.25 * getRides());
+        }
+        return super.getTicketPrice().getPrice();
     }
 }

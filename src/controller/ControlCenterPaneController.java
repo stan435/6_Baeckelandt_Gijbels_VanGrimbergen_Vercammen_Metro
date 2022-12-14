@@ -20,7 +20,7 @@ public class ControlCenterPaneController implements MetroObserver {
 
 
     @Override
-    public void update(MetroEventsEnum e) throws BiffException, IOException {
+    public void update(MetroEventsEnum e, String ...args) throws BiffException, IOException {
         /*
         if(MetroEventsEnum.OPEN_METROSTATION.equals(e)){
             openMetroStation();

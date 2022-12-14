@@ -17,17 +17,25 @@ public class MetroStationViewController implements MetroObserver {
         this.metroFacade = metroFacade;
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
         metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
+        metroFacade.registerObeserver(MetroEventsEnum.SCAN_METROCARDS,this);
     }
 
 
     @Override
-    public void update(MetroEventsEnum e) throws BiffException, IOException {
+    public void update(MetroEventsEnum e, String ...args) throws BiffException, IOException {
         if (MetroEventsEnum.OPEN_METROSTATION.equals(e) | MetroEventsEnum.BUY_METROCARD.equals(e)) {
             metroStationView.updateIds(metroFacade.getMetroCardIDList());
+        }
+        if(MetroEventsEnum.SCAN_METROCARDS.equals(e)){
+            metroStationView.updateStatText(args);
         }
     }
 
     public void setView(MetroStationView metroStationView){
         this.metroStationView = metroStationView;
+    }
+
+    public void scanMetroCard(String metroCardId, int gateId) throws BiffException, IOException {
+        metroFacade.scanMetroGate(metroCardId, gateId);
     }
 }

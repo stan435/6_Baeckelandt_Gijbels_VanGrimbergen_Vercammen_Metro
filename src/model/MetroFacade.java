@@ -18,6 +18,7 @@ import java.util.*;
 public class MetroFacade implements Subject {
     private final Map<MetroEventsEnum, List<MetroObserver>> observers = new HashMap<>();
     private MetroCardDatabase metroCardDatabase = new MetroCardDatabase();
+    private MetroStation metroStation = new MetroStation();
 
 
     public MetroFacade(){
@@ -77,17 +78,23 @@ public class MetroFacade implements Subject {
         return metroCardDatabase.getMetroCard(id);
     }
 
+    public void scanMetroGate(String metroCardId, int gateId) throws BiffException, IOException {
+        String result = metroStation.scanMetroGate(gateId, getMetroCard(metroCardId)) + " " + metroCardId;
+        notifyObservers(MetroEventsEnum.SCAN_METROCARDS,result);
+    }
 
-        @Override
+
+
+    @Override
     public void registerObeserver(MetroEventsEnum e, MetroObserver o) {
         observers.get(e).add(o);
         String a = "";
     }
 
     @Override
-    public void notifyObservers(MetroEventsEnum e) throws BiffException, IOException {
+    public void notifyObservers(MetroEventsEnum e, String ...args) throws BiffException, IOException {
         for(MetroObserver o: observers.get(e)){
-            o.update(e);
+            o.update(e, args);
         }
     }
 

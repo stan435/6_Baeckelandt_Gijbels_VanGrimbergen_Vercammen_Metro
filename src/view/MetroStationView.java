@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import jxl.read.biff.BiffException;
 import view.panels.SetupPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -48,7 +50,8 @@ public class MetroStationView {
 	private Label updateStatusgate1 = new Label();
 	private Label updateStatusgate2 = new Label();
 	private Label updateStatusgate3 = new Label();
-
+	private VBox gate1;
+	private Label stateText;
 
 	private Stage stage = new Stage();
 
@@ -77,11 +80,19 @@ public class MetroStationView {
 		Label idgate3 = new Label("MetrocardID:");
 
 
-		VBox gate1 = new VBox();
+		gate1 = new VBox();
 		gate1.getStyleClass().add("vbox");
-
 		gate1.getChildren().addAll(gate1Text, idgate1, idsgate1, scanMetrocardgate1, walkThroughgate1, updateStatusgate1);
 
+		scanMetrocardgate1.setOnAction(event -> {
+			try {
+				metroStationViewController.scanMetroCard(String.valueOf(idsgate1.getValue()), 1);
+			} catch (BiffException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 
 		VBox gate2 = new VBox();
 		gate2.getStyleClass().add("vbox");
@@ -103,6 +114,17 @@ public class MetroStationView {
 			idsgate2.setItems(metroCardsIDs);
 			idsgate3.setItems(metroCardsIDs);
 
+	}
+
+	public void updateStatText(String ...state){
+		gate1.getChildren().remove(stateText);
+		String text = "";
+		for (int i = 0; i < state.length; i++) {
+			text = state[i];
+		}
+		stateText= new Label(text);
+		stateText.setId("state");
+		gate1.getChildren().add(stateText);
 	}
 
 }
