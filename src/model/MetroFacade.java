@@ -92,6 +92,7 @@ public class MetroFacade implements Subject {
         }else{
             notifyObservers(MetroEventsEnum.Alert_CONTROLCENTER, Integer.toString(gateId));
         }
+        String o= ";";
     }
 
     public void walkThroughGate(String metroCardId, int gateId) throws BiffException, IOException {
