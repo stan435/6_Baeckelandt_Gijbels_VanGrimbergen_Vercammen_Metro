@@ -11,4 +11,13 @@ public interface MetroGateState {
     public default String walkThroughGate(StateContext stateContext, MetroCard metroCard){
         return "can not walk through gate";
     }
+
+    public default String activateGate(StateContext stateContext){
+        return "gate already active";
+    }
+
+    public default String deactivateGate(StateContext stateContext){
+        return "gate cannot be deactivated";
+    }
+
 }

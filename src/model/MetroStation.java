@@ -20,4 +20,12 @@ public class MetroStation {
     public String walkThroughGate(int getid, MetroCard metrocard){
         return metroGates.get(getid).walkThrough(metrocard);
     }
+
+    public String activateGate(int getid){
+        return metroGates.get(getid).activate();
+    }
+    public String deactivateGate(int getid){
+        return metroGates.get(getid).deactivate();
+    }
+
 }

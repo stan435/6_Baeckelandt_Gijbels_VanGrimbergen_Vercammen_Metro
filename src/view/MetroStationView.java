@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import view.panels.SetupPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -47,9 +48,6 @@ public class MetroStationView {
 	private Button walkThroughgate1 = new Button("Walk Through Gate");
 	private Button walkThroughgate2 = new Button("Walk Through Gate");
 	private Button walkThroughgate3 = new Button("Walk Through Gate");
-	private Label updateStatusgate1 = new Label();
-	private Label updateStatusgate2 = new Label();
-	private Label updateStatusgate3 = new Label();
 	private VBox gate1, gate2,gate3;
 
 	private Label stateText;
@@ -83,7 +81,10 @@ public class MetroStationView {
 
 		gate1 = new VBox();
 		gate1.getStyleClass().add("vbox");
-		gate1.getChildren().addAll(gate1Text, idgate1, idsgate1, scanMetrocardgate1, walkThroughgate1, updateStatusgate1);
+		idsgate1.setDisable(true);
+		scanMetrocardgate1.setDisable(true);
+		walkThroughgate1.setDisable(true);
+		gate1.getChildren().addAll(gate1Text, idgate1, idsgate1, scanMetrocardgate1, walkThroughgate1);
 
 		scanMetrocardgate1.setOnAction(event -> {
 			try {
@@ -91,6 +92,8 @@ public class MetroStationView {
 			} catch (BiffException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (WriteException e) {
 				e.printStackTrace();
 			}
 		});
@@ -109,7 +112,10 @@ public class MetroStationView {
 
 		gate2 = new VBox();
 		gate2.getStyleClass().add("vbox");
-		gate2.getChildren().addAll(gate2Text, idgate2, idsgate2, scanMetrocardgate2, walkThroughgate2, updateStatusgate2);
+		idsgate2.setDisable(true);
+		scanMetrocardgate2.setDisable(true);
+		walkThroughgate2.setDisable(true);
+		gate2.getChildren().addAll(gate2Text, idgate2, idsgate2, scanMetrocardgate2, walkThroughgate2);
 
 		scanMetrocardgate2.setOnAction(event -> {
 			try {
@@ -117,6 +123,8 @@ public class MetroStationView {
 			} catch (BiffException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (WriteException e) {
 				e.printStackTrace();
 			}
 		});
@@ -134,7 +142,10 @@ public class MetroStationView {
 
 		gate3 = new VBox();
 		gate3.getStyleClass().add("vbox");
-		gate3.getChildren().addAll(gate3Text, idgate3, idsgate3, scanMetrocardgate3, walkThroughgate3, updateStatusgate3);
+		idsgate3.setDisable(true);
+		scanMetrocardgate3.setDisable(true);
+		walkThroughgate3.setDisable(true);
+		gate3.getChildren().addAll(gate3Text, idgate3, idsgate3, scanMetrocardgate3, walkThroughgate3);
 
 		scanMetrocardgate3.setOnAction(event -> {
 			try {
@@ -142,6 +153,8 @@ public class MetroStationView {
 			} catch (BiffException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (WriteException e) {
 				e.printStackTrace();
 			}
 		});
@@ -167,6 +180,48 @@ public class MetroStationView {
 			idsgate2.setItems(metroCardsIDs);
 			idsgate3.setItems(metroCardsIDs);
 
+	}
+
+	public void setStyleOpen(String id){
+		if(id.equals("1")){
+			gate1.setStyle("-fx-background-color: #02f8b6");
+			idsgate1.setDisable(false);
+			scanMetrocardgate1.setDisable(false);
+			walkThroughgate1.setDisable(false);
+		}
+		if(id.equals("2")){
+			gate2.setStyle("-fx-background-color: #02f8b6");
+			idsgate2.setDisable(false);
+			scanMetrocardgate2.setDisable(false);
+			walkThroughgate2.setDisable(false);
+		}
+		if(id.equals("3")){
+			gate3.setStyle("-fx-background-color: #02f8b6");
+			idsgate3.setDisable(false);
+			scanMetrocardgate3.setDisable(false);
+			walkThroughgate3.setDisable(false);
+		}
+	}
+
+	public void setStyleClosed(String id){
+		if(id.equals("1")){
+			gate1.setStyle("-fx-background-color: #f81e1e");
+			idsgate1.setDisable(true);
+			scanMetrocardgate1.setDisable(true);
+			walkThroughgate1.setDisable(true);
+		}
+		if(id.equals("2")){
+			gate2.setStyle("-fx-background-color: #f81e1e");
+			idsgate2.setDisable(true);
+			scanMetrocardgate2.setDisable(true);
+			walkThroughgate2.setDisable(true);
+		}
+		if(id.equals("3")){
+			gate3.setStyle("-fx-background-color: #f81e1e");
+			idsgate3.setDisable(true);
+			scanMetrocardgate3.setDisable(true);
+			walkThroughgate3.setDisable(true);
+		}
 	}
 
 	public void updateStatText(String ...state){

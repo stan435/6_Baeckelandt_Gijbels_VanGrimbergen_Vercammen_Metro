@@ -17,5 +17,12 @@ public class MetroGate {
         return  stateContext.getState().walkThroughGate(stateContext,metroCard);
     }
 
+    public String activate(){
+        return stateContext.getState().activateGate(stateContext);
+    }
+    public String deactivate(){
+        return stateContext.getState().deactivateGate(stateContext);
+    }
+
 
 }

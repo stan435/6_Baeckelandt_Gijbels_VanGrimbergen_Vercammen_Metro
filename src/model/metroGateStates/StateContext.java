@@ -4,7 +4,7 @@ public class StateContext {
     MetroGateState metroGateState;
 
     public StateContext(){
-        metroGateState = new ClosedState();
+        metroGateState = new InactiveState();
     }
 
     public MetroGateState getState(){

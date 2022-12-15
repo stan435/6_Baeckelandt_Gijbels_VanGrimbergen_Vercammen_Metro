@@ -2,6 +2,7 @@ package model;
 
 import controller.ControlCenterPaneController;
 import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import model.TicketpriceDecorator.TicketPrice;
 import model.TicketpriceDecorator.TicketPriceDiscountEnum;
 import model.TicketpriceDecorator.TicketPriceFactory;
@@ -61,7 +62,7 @@ public class MetroFacade implements Subject {
             isStudent = false;
         }
         TicketPrice ticketPrice = TicketPriceFactory.createTicketPrice(is26Min,is64Plus,isStudent,metroCard, rides);
-         return 0;
+         return ticketPrice.getPrice();
     }
 
     public ArrayList<String> getMetroTicketDiscountList() throws IOException {
@@ -81,18 +82,33 @@ public class MetroFacade implements Subject {
         return metroCardDatabase.getMetroCard(id);
     }
 
-    public void scanMetroGate(String metroCardId, int gateId) throws BiffException, IOException {
+    public void scanMetroGate(String metroCardId, int gateId) throws BiffException, IOException, WriteException {
         String result = metroStation.scanMetroGate(gateId, getMetroCard(metroCardId));
         notifyObservers(MetroEventsEnum.SCAN_METROCARDS,result, Integer.toString(gateId));
-        if(getMetroCard(metroCardId).getDate().plusYears(1).isAfter(YearMonth.now()) || result.equals("Can not walk through closed gate")){
-            notifyObservers(MetroEventsEnum.Alert_CONTROLCENTER);
+        if(result.equals("metrocard " + getMetroCard(metroCardId).getId() + " is scanned")){
+            metroCardDatabase.updateMetrocard(metroCardId);
+            notifyObservers(MetroEventsEnum.UPDATE_METROCARD);
+            notifyObservers(MetroEventsEnum.SCAN_METROCARDS_SUCCESFULL, Integer.toString(gateId));
+        }else{
+            notifyObservers(MetroEventsEnum.Alert_CONTROLCENTER, Integer.toString(gateId));
         }
     }
 
-    public void walkThroughGate(String metrocardId, int gateId) throws BiffException, IOException {
-        String result = metroStation.walkThroughGate(gateId, getMetroCard(metrocardId));
+    public void walkThroughGate(String metroCardId, int gateId) throws BiffException, IOException {
+        String result = metroStation.walkThroughGate(gateId, getMetroCard(metroCardId));
         notifyObservers(MetroEventsEnum.WALKTHROUGHGATE, result, Integer.toString(gateId));
+        if(result.equals("Can not walk through \n closed gate")){
+            notifyObservers(MetroEventsEnum.Alert_CONTROLCENTER, Integer.toString(gateId));
+        }
+    }
 
+    public void activateGate(int gateId) throws BiffException, IOException {
+        String result = metroStation.activateGate(gateId);
+        notifyObservers(MetroEventsEnum.ACTIVATE_GATE,result, Integer.toString(gateId));
+    }
+    public void deactivateGate(int gateId) throws BiffException, IOException {
+        String result = metroStation.deactivateGate(gateId);
+        notifyObservers(MetroEventsEnum.DEACTIVATE_GATE,result, Integer.toString(gateId));
     }
 
 

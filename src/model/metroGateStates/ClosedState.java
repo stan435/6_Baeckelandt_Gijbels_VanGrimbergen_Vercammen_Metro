@@ -17,8 +17,17 @@ public class ClosedState implements MetroGateState{
         if(metroCard.getDate().plusYears(1).isBefore(yearMonth)){
             return "metrocard " + metroCard.getId() + " is expired";
         }
+        if(metroCard.getBeschikbaar() <= 0){
+            return "metrocard " + metroCard.getId() + " has \n no rides left";
+        }
         stateContext.setState(new OpenState());
         return "metrocard " + metroCard.getId() + " is scanned";
+    }
+
+    @Override
+    public String deactivateGate(StateContext stateContext) {
+        stateContext.setState(new InactiveState());
+        return "gate is inactive";
     }
 
 

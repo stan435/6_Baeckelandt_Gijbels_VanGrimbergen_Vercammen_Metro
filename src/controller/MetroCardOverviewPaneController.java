@@ -17,6 +17,8 @@ public class MetroCardOverviewPaneController implements MetroObserver {
         this.metroFacade = metroFacade;
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
         metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
+        metroFacade.registerObeserver(MetroEventsEnum.UPDATE_METROCARD,this);
+
     }
 
     public void setView(MetroCardOverviewPane metroCardOverviewPane){
@@ -26,7 +28,7 @@ public class MetroCardOverviewPaneController implements MetroObserver {
 
     @Override
     public void update(MetroEventsEnum e, String ...args) throws IOException {
-        if(MetroEventsEnum.OPEN_METROSTATION.equals(e) | MetroEventsEnum.BUY_METROCARD.equals(e)){
+        if(MetroEventsEnum.OPEN_METROSTATION.equals(e) | MetroEventsEnum.BUY_METROCARD.equals(e) | MetroEventsEnum.UPDATE_METROCARD.equals(e)){
             metroCardOverviewPane.updateMetrocardList(metroFacade.getMetroCardList());
         }
     }

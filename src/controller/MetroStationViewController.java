@@ -1,6 +1,7 @@
 package controller;
 
 import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import model.MetroEventsEnum;
 import model.MetroFacade;
 import model.MetroObserver;
@@ -19,6 +20,8 @@ public class MetroStationViewController implements MetroObserver {
         metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
         metroFacade.registerObeserver(MetroEventsEnum.SCAN_METROCARDS,this);
         metroFacade.registerObeserver(MetroEventsEnum.WALKTHROUGHGATE,this);
+        metroFacade.registerObeserver(MetroEventsEnum.ACTIVATE_GATE,this);
+        metroFacade.registerObeserver(MetroEventsEnum.DEACTIVATE_GATE,this);
     }
 
 
@@ -30,13 +33,25 @@ public class MetroStationViewController implements MetroObserver {
         if(MetroEventsEnum.SCAN_METROCARDS.equals(e) | MetroEventsEnum.WALKTHROUGHGATE.equals(e)){
             metroStationView.updateStatText(args);
         }
+        if(MetroEventsEnum.ACTIVATE_GATE.equals(e)){
+            metroStationView.updateStatText(args);
+            metroStationView.setStyleOpen(args[1]);
+        }
+        if(MetroEventsEnum.DEACTIVATE_GATE.equals(e)){
+            if(args[0].equals("gate cannot be deactivated")) {
+                metroStationView.updateStatText(args);
+            }else{
+                metroStationView.updateStatText(args);
+                metroStationView.setStyleClosed(args[1]);
+            }
+        }
     }
 
     public void setView(MetroStationView metroStationView){
         this.metroStationView = metroStationView;
     }
 
-    public void scanMetroCard(String metroCardId, int gateId) throws BiffException, IOException {
+    public void scanMetroCard(String metroCardId, int gateId) throws BiffException, IOException, WriteException {
         metroFacade.scanMetroGate(metroCardId, gateId);
     }
 
