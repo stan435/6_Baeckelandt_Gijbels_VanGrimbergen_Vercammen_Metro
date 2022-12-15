@@ -10,12 +10,12 @@ public class ChristmasLeaveDiscount extends TicketPriceDiscountDecorator{
     }
 
     @Override
-    public String getPriceText() {
+    public String getPriceText(){
         return super.getTicketPrice().getPriceText() + "- 0.10$ Christmas leave discount";
     }
 
     @Override
     public double getPrice() {
-        return super.getTicketPrice().getPrice() - 0.10;
+        return super.getTicketPrice().getPrice() - (0.10 * getRides());
     }
 }

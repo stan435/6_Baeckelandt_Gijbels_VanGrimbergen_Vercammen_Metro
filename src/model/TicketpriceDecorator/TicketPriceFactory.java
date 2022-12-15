@@ -19,7 +19,6 @@ public class TicketPriceFactory {
         properties.load(is);
         String name = properties.getProperty("discount");
         String[] list = name.split(",");
-
         if(list.length != 0){
             for (int i = 0; i < list.length; i++) {
                 TicketPriceDiscountEnum discount = TicketPriceDiscountEnum.valueOf(list[i].toUpperCase());

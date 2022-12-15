@@ -26,7 +26,7 @@ public class MetroTicketViewController implements MetroObserver {
     }
 
     @Override
-    public void update(MetroEventsEnum e) throws IOException {
+    public void update(MetroEventsEnum e, String ...args) throws IOException {
         if(MetroEventsEnum.OPEN_METROSTATION.equals(e) | MetroEventsEnum.BUY_METROCARD.equals(e)){
             metroTicketView.updateDropdownIDs(metroFacade.getMetroCardIDList());
         }

@@ -11,15 +11,15 @@ import java.util.Map;
 
 public class TekstLoadSaveTemplate<K,V> {
 
-    public Map<String,MetroCard> load(File file) throws IOException {
-        Map<String,MetroCard> returnMap = new HashMap<String,MetroCard>();
+    public Map<Integer,MetroCard> load(File file) throws IOException {
+        Map<Integer,MetroCard> returnMap = new HashMap<Integer,MetroCard>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line = reader.readLine();
             while (line != null && !line.trim().equals("")) {
                 line = line.replaceAll("#","-");
                 String[] tokens = line.split(";");
                 MetroCard element = maakObject(tokens);
-                String key = getKey(tokens);
+                Integer key = getKey(tokens);
                 returnMap.put(key,element);
                 line = reader.readLine();
             }
@@ -43,8 +43,8 @@ public class TekstLoadSaveTemplate<K,V> {
         return metroCard;
     }
 
-    public String getKey(String[] tokens){
-        return tokens[0];
+    public Integer getKey(String[] tokens){
+        return Integer.parseInt(tokens[0]);
     }
 }
 
