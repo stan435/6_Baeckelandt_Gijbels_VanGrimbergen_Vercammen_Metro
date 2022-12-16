@@ -23,6 +23,7 @@ public class MetroFacade implements Subject {
     private final Map<MetroEventsEnum, List<MetroObserver>> observers = new HashMap<>();
     private MetroCardDatabase metroCardDatabase = new MetroCardDatabase();
     private MetroStation metroStation = new MetroStation();
+    private TicketPriceFactory ticketPriceFactory = new TicketPriceFactory();
 
 
     public MetroFacade(){
@@ -31,13 +32,19 @@ public class MetroFacade implements Subject {
             }
         }
 
-
     public void openMetroStation() throws BiffException, IOException {
         metroCardDatabase.setStrategy(LoadSaveStrategyFactory.getStrategy());
         metroCardDatabase.load();
         metroCardDatabase.getMetroCardList();
         notifyObservers(MetroEventsEnum.OPEN_METROSTATION);
     }
+
+    public void closeMetroStation() throws BiffException, IOException, WriteException {
+        metroCardDatabase.save();
+        notifyObservers(MetroEventsEnum.CLOSE_METROSTATION);
+    }
+
+
 
     public ArrayList<MetroCard> getMetroCardList(){
         return metroCardDatabase.getMetroCardList();
@@ -48,21 +55,20 @@ public class MetroFacade implements Subject {
     }
 
     public void buyMetroCards() throws IOException, BiffException {
-        metroCardDatabase.setStrategy(LoadSaveStrategyFactory.getStrategy());
         metroCardDatabase.addMetroCard();
         notifyObservers(MetroEventsEnum.BUY_METROCARD);
     }
 
     public double getPrice(Boolean is26Min, Boolean is64Plus, Boolean isStudent, MetroCard metroCard, int rides) throws IOException {
-        ArrayList<String> list = getMetroTicketDiscountList();
-        if(!list.contains(TicketPriceDiscountEnum.AGE64PLUSDISCOUNT.toString())){
-            is64Plus = false;
-        }
-        if(!list.contains(TicketPriceDiscountEnum.STUDENTDISCOUNT.toString())){
-            isStudent = false;
-        }
-        TicketPrice ticketPrice = TicketPriceFactory.createTicketPrice(is26Min,is64Plus,isStudent,metroCard, rides);
-         return ticketPrice.getPrice();
+        ticketPriceFactory.createTicketPrice(is26Min,is64Plus,isStudent,metroCard, rides);
+        double result = ticketPriceFactory.getPriceToShow();
+        return result;
+    }
+
+    public String getPriceText(Boolean is26Min, Boolean is64Plus, Boolean isStudent, MetroCard metroCard, int rides) throws IOException {
+        ticketPriceFactory.createTicketPrice(is26Min,is64Plus,isStudent,metroCard, rides);
+        String result = ticketPriceFactory.getTextToShow();
+        return result;
     }
 
     public ArrayList<String> getMetroTicketDiscountList() throws IOException {
@@ -86,13 +92,12 @@ public class MetroFacade implements Subject {
         String result = metroStation.scanMetroGate(gateId, getMetroCard(metroCardId));
         notifyObservers(MetroEventsEnum.SCAN_METROCARDS,result, Integer.toString(gateId));
         if(result.equals("metrocard " + getMetroCard(metroCardId).getId() + " is scanned")){
-            metroCardDatabase.updateMetrocard(metroCardId);
+            metroCardDatabase.updateMetrocardGebruikt(metroCardId);
             notifyObservers(MetroEventsEnum.UPDATE_METROCARD);
             notifyObservers(MetroEventsEnum.SCAN_METROCARDS_SUCCESFULL, Integer.toString(gateId));
         }else{
             notifyObservers(MetroEventsEnum.Alert_CONTROLCENTER, Integer.toString(gateId));
         }
-        String o= ";";
     }
 
     public void walkThroughGate(String metroCardId, int gateId) throws BiffException, IOException {
@@ -101,6 +106,12 @@ public class MetroFacade implements Subject {
         if(result.equals("Can not walk through \n closed gate")){
             notifyObservers(MetroEventsEnum.Alert_CONTROLCENTER, Integer.toString(gateId));
         }
+    }
+
+    public void buyMetroCardTickets(MetroCard metroCard, String rides, String moneyAmount) throws BiffException, IOException, WriteException {
+        metroCardDatabase.updateMetroCardRides(metroCard, Integer.parseInt(rides));
+        notifyObservers(MetroEventsEnum.UPDATE_METROCARD);
+        notifyObservers(MetroEventsEnum.BUY_METROCARDTICKETS, rides, moneyAmount);
     }
 
     public void activateGate(int gateId) throws BiffException, IOException {

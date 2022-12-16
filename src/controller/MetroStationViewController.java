@@ -22,6 +22,8 @@ public class MetroStationViewController implements MetroObserver {
         metroFacade.registerObeserver(MetroEventsEnum.WALKTHROUGHGATE,this);
         metroFacade.registerObeserver(MetroEventsEnum.ACTIVATE_GATE,this);
         metroFacade.registerObeserver(MetroEventsEnum.DEACTIVATE_GATE,this);
+        metroFacade.registerObeserver(MetroEventsEnum.CLOSE_METROSTATION,this);
+
     }
 
 
@@ -44,6 +46,9 @@ public class MetroStationViewController implements MetroObserver {
                 metroStationView.updateStatText(args);
                 metroStationView.setStyleClosed(args[1]);
             }
+        }
+        if(MetroEventsEnum.CLOSE_METROSTATION.equals(e)){
+            metroStationView.closeMetroStation();
         }
     }
 

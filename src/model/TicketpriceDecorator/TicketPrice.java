@@ -7,12 +7,8 @@ public abstract class TicketPrice {
     private MetroCard attribute;
     private int rides;
 
-    public TicketPrice(Boolean is26Min, Boolean is64Plus, Boolean isStudent, MetroCard metroCard, int rides){
-        setStudent(isStudent);
-        setIs64Plus(is64Plus);
-        setIs26Min(is26Min);
-        setRides(rides);
-        setAttribute(metroCard);
+    public TicketPrice(){
+
     }
 
     public void setRides(int rides) {

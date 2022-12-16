@@ -96,7 +96,7 @@ public class SetupPane extends VBox {
                     list.add("CHRISTMASLEAVEDISCOUNT");
                 }
                 if(checkBox3.isSelected()){
-                    list.add("FREQUENTTRAVELLERDISCOUNT");
+                    list.add("FREQUENTTRAVELERDISCOUNT");
                 }
                 if(checkBox4.isSelected()){
                     list.add("AGE64PLUSDISCOUNT");

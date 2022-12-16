@@ -40,9 +40,9 @@ public class ExcelLoadSaveTemplate {
 
     public Map load (File file) throws BiffException, IOException {
         ArrayList<ArrayList<String>> list = excelPlugin.load(file);
-        Map<String, MetroCard> map = new HashMap<>();
+        Map<Integer, MetroCard> map = new HashMap<>();
         for(int i = 0; i< list.size(); i++){
-            map.put((list.get(i).get(0)),new MetroCard(Integer.parseInt(list.get(i).get(0)), YearMonth.parse(list.get(i).get(1).replaceAll("#","-")),Integer.parseInt(list.get(i).get(2)),Integer.parseInt(list.get(i).get(3))));
+            map.put(Integer.parseInt((list.get(i).get(0))),new MetroCard(Integer.parseInt(list.get(i).get(0)), YearMonth.parse(list.get(i).get(1).replaceAll("#","-")),Integer.parseInt(list.get(i).get(2)),Integer.parseInt(list.get(i).get(3))));
         }
         return map;
     }

@@ -63,7 +63,12 @@ public class MetroCardDatabase {
         return metrocards.get(Integer.parseInt(id));
     }
 
-    public void updateMetrocard(String metroCardId) throws BiffException, WriteException, IOException {
+    public void updateMetroCardRides(MetroCard metroCard, int rides) throws BiffException, WriteException, IOException {
+        metroCard.setBeschikbaar(metroCard.getBeschikbaar()+rides);
+        save();
+    }
+
+    public void updateMetrocardGebruikt(String metroCardId) throws BiffException, WriteException, IOException {
         MetroCard metroCard = getMetroCard(metroCardId);
         metroCard.setBeschikbaar(metroCard.getBeschikbaar() -1);
         metroCard.setGebruikt(metroCard.getGebruikt() +1);

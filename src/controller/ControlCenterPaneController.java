@@ -1,6 +1,7 @@
 package controller;
 
 import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import model.MetroEventsEnum;
 import model.MetroFacade;
 import model.MetroObserver;
@@ -19,6 +20,7 @@ public class ControlCenterPaneController implements MetroObserver {
         metroFacade.registerObeserver(MetroEventsEnum.Alert_CONTROLCENTER,this);
         metroFacade.registerObeserver(MetroEventsEnum.SCAN_METROCARDS,this);
         metroFacade.registerObeserver(MetroEventsEnum.SCAN_METROCARDS_SUCCESFULL,this);
+        metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARDTICKETS,this);
     }
 
     public void setView(ControlCenter controlCenter){
@@ -34,10 +36,13 @@ public class ControlCenterPaneController implements MetroObserver {
             }
         }
         if(MetroEventsEnum.Alert_CONTROLCENTER.equals(e)){
-            controlCenter.addAlter(args[0]);
+            controlCenter.addAllert(args[0]);
         }
         if(MetroEventsEnum.SCAN_METROCARDS_SUCCESFULL.equals(e)){
             controlCenter.updateGateScannedCards(args[0]);
+        }
+        if(MetroEventsEnum.BUY_METROCARDTICKETS.equals(e)){
+            controlCenter.updateTicketNumberFields(args[0], args[1]);
         }
 
     }
@@ -45,6 +50,10 @@ public class ControlCenterPaneController implements MetroObserver {
 
     public void openMetroStation() throws BiffException, IOException {
         metroFacade.openMetroStation();
+    }
+
+    public void closeMetroStation() throws BiffException, IOException, WriteException {
+        metroFacade.closeMetroStation();
     }
 
     public void activateGate(int gateId) throws BiffException, IOException {
