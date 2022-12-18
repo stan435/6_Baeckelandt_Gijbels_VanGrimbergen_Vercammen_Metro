@@ -1,11 +1,17 @@
 package model;
 
+import model.metroGateStates.OpenState;
 import model.metroGateStates.StateContext;
+
+import java.util.Objects;
 
 public class MetroGate {
     StateContext stateContext;
+    private int scannedCards;
 
-    public MetroGate(){
+
+    public MetroGate(int scannedCards){
+        setScannedCards(scannedCards);
         this.stateContext = new StateContext();
     }
 
@@ -24,5 +30,16 @@ public class MetroGate {
         return stateContext.getState().deactivateGate(stateContext);
     }
 
+    public int getScannedCards() {
+        return scannedCards;
+    }
 
+    public void setScannedCards(int scannedCards) {
+        this.scannedCards = scannedCards;
+    }
+
+    public void closeMetroStation(MetroCard metroCard){
+        stateContext.getState().walkThroughGate(stateContext, metroCard);
+        stateContext.getState().deactivateGate(stateContext);
+    }
 }

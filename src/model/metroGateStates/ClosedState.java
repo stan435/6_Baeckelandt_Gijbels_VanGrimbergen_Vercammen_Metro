@@ -8,7 +8,7 @@ public class ClosedState implements MetroGateState{
 
     @Override
     public String walkThroughGate(StateContext stateContext, MetroCard metroCard) {
-        return "Can not walk through \n closed gate";
+        return "Gate is closed";
     }
 
     @Override

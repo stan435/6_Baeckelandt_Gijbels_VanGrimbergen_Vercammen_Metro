@@ -26,7 +26,7 @@ public class TicketPriceFactory {
         List<String> items = Arrays.asList(name.split(","));
 
         TicketPrice price = new BasicTicketPrice(rides);
-        double priceAmount = price.getPrice() * rides;
+        double priceAmount = price.getPrice();
         String toShow = price.getPriceText();
 
         if (is64Plus && items.contains(TicketPriceDiscountEnum.AGE64PLUSDISCOUNT.toString())) {

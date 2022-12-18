@@ -53,8 +53,10 @@ public class MetroStationView {
 	private VBox gate1, gate2,gate3;
 	private HBox gates;
 	private Scene scene;
+	private  TextField stateText1 = new TextField();
+	private TextField stateText2 = new TextField();
+	private TextField stateText3 = new TextField();
 
-	private Label stateText;
 
 	private Stage stage = new Stage();
 
@@ -86,7 +88,8 @@ public class MetroStationView {
 		gate1 = new VBox();
 		gate1.setId("1");
 		gate1.getStyleClass().add("vbox");
-		gate1.getChildren().addAll(gate1Text, idgate1, idsgate1, scanMetrocardgate1, walkThroughgate1);
+		stateText1.setMaxHeight(100);
+		gate1.getChildren().addAll(gate1Text, idgate1, idsgate1, scanMetrocardgate1, walkThroughgate1,stateText1);
 		disableNodes(gate1);
 
 		scanMetrocardgate1.setOnAction(event -> scanMetroGate(metroStationViewController,idsgate1,1));
@@ -96,7 +99,7 @@ public class MetroStationView {
 		gate2 = new VBox();
 		gate2.setId("2");
 		gate2.getStyleClass().add("vbox");
-		gate2.getChildren().addAll(gate2Text, idgate2, idsgate2, scanMetrocardgate2, walkThroughgate2);
+		gate2.getChildren().addAll(gate2Text, idgate2, idsgate2, scanMetrocardgate2, walkThroughgate2,stateText2);
 		disableNodes(gate2);
 
 		scanMetrocardgate2.setOnAction(event -> scanMetroGate(metroStationViewController,idsgate2,2));
@@ -105,7 +108,7 @@ public class MetroStationView {
 		gate3 = new VBox();
 		gate3.setId("3");
 		gate3.getStyleClass().add("vbox");
-		gate3.getChildren().addAll(gate3Text, idgate3, idsgate3, scanMetrocardgate3, walkThroughgate3);
+		gate3.getChildren().addAll(gate3Text, idgate3, idsgate3, scanMetrocardgate3, walkThroughgate3,stateText3);
 		disableNodes(gate3);
 
 		scanMetrocardgate3.setOnAction(event -> scanMetroGate(metroStationViewController,idsgate3,3));
@@ -125,7 +128,7 @@ public class MetroStationView {
 	public void setStyleOpen(String id){
 		VBox vBox = (VBox) scene.lookup("#" + id);
 		vBox.setStyle("-fx-background-color: #02f8b6");
-		enableNodes(vBox);
+		enableNodes(vBox,vBox.getChildren().get(5));
 	}
 
 	public void setStyleClosed(String id){
@@ -136,17 +139,14 @@ public class MetroStationView {
 
 	public void updateStatText(String ...state){
 		VBox vBox = (VBox) scene.lookup("#" + state[1]);
-		vBox.getChildren().remove(stateText);
-		String text = "";
-		text = state[0];
-		stateText= new Label(text);
-		stateText.setId("state");
-		vBox.getChildren().add(stateText);
-
+		TextField textField =(TextField)  vBox.getChildren().get(5);
+		textField.setText(state[0]);
 	}
-	public void enableNodes(VBox vBox){
+	public void enableNodes(VBox vBox,Node exception){
 		for (int i = 0; i < vBox.getChildren().size(); i++) {
-			vBox.getChildren().get(i).setDisable(false);
+			if(vBox.getChildren().get(i) != exception){
+				vBox.getChildren().get(i).setDisable(false);
+			}
 		}
 
 	}
@@ -154,6 +154,8 @@ public class MetroStationView {
 		for (int i = 0; i < vBox.getChildren().size(); i++) {
 			vBox.getChildren().get(i).setDisable(true);
 		}
+		TextField textField = (TextField) vBox.getChildren().get(5);
+		textField.setText("");
 	}
 
 	public void scanMetroGate(MetroStationViewController metroStationViewController, ChoiceBox choiceBox, int gateId){

@@ -40,6 +40,7 @@ public class MetroFacade implements Subject {
     }
 
     public void closeMetroStation() throws BiffException, IOException, WriteException {
+        metroStation.closeMetroStation(metroCardDatabase.getMetroCard("1"));
         metroCardDatabase.save();
         notifyObservers(MetroEventsEnum.CLOSE_METROSTATION);
     }
@@ -88,10 +89,15 @@ public class MetroFacade implements Subject {
         return metroCardDatabase.getMetroCard(id);
     }
 
+    public int getMetroGateScannedCards(String gateId){
+       return metroStation.getmetroGate(Integer.parseInt(gateId)).getScannedCards();
+    }
+
     public void scanMetroGate(String metroCardId, int gateId) throws BiffException, IOException, WriteException {
         String result = metroStation.scanMetroGate(gateId, getMetroCard(metroCardId));
         notifyObservers(MetroEventsEnum.SCAN_METROCARDS,result, Integer.toString(gateId));
         if(result.equals("metrocard " + getMetroCard(metroCardId).getId() + " is scanned")){
+            metroStation.getmetroGate(gateId).setScannedCards(metroStation.getmetroGate(gateId).getScannedCards() + 1);
             metroCardDatabase.updateMetrocardGebruikt(metroCardId);
             notifyObservers(MetroEventsEnum.UPDATE_METROCARD);
             notifyObservers(MetroEventsEnum.SCAN_METROCARDS_SUCCESFULL, Integer.toString(gateId));
@@ -103,7 +109,7 @@ public class MetroFacade implements Subject {
     public void walkThroughGate(String metroCardId, int gateId) throws BiffException, IOException {
         String result = metroStation.walkThroughGate(gateId, getMetroCard(metroCardId));
         notifyObservers(MetroEventsEnum.WALKTHROUGHGATE, result, Integer.toString(gateId));
-        if(result.equals("Can not walk through \n closed gate")){
+        if(result.equals("Gate is closed")){
             notifyObservers(MetroEventsEnum.Alert_CONTROLCENTER, Integer.toString(gateId));
         }
     }

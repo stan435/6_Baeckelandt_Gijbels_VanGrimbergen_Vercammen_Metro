@@ -4,12 +4,11 @@ package view.panels;
 import controller.ControlCenterPaneController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.Button;
 
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import jxl.read.biff.BiffException;
@@ -45,6 +44,7 @@ public class ControlCenter extends GridPane {
             enableNodes(gate2,amount2);
             enableNodes(gate3,amount3);
             close.setDisable(false);
+            open.setDisable(true);
             try {
                 controlCenterPaneController.openMetroStation();
             } catch (BiffException | IOException e) {
@@ -59,6 +59,7 @@ public class ControlCenter extends GridPane {
             disableNodes(gate2);
             disableNodes(gate3);
             close.setDisable(true);
+            open.setDisable(false);
             try {
                 controlCenterPaneController.closeMetroStation();
             } catch (BiffException | IOException | WriteException e) {
@@ -71,10 +72,12 @@ public class ControlCenter extends GridPane {
 
         numberSoldTickets = new Label("Number of sold tickets: ");
         number = new TextField("0");
+        number.setDisable(true);
         hBox1 = new HBox(numberSoldTickets,number);
 
         totalPriceSoldTickets = new Label("Total $ amount of sold tickets: ");
         price = new TextField("0");
+        price.setDisable(true);
         hBox2 = new HBox(totalPriceSoldTickets,price);
 
         child2 = new VBox(hBox1,hBox2);
@@ -133,13 +136,16 @@ public class ControlCenter extends GridPane {
         alerts.setId("alert");
         child4 = new VBox(alertTitel);
 
-        parent = new VBox(child1,child2,child3,child4);
+        ScrollPane scrollPane = new ScrollPane(child4);
+        scrollPane.setFitToHeight(false);
+
+        parent = new VBox(child1,child2,child3,scrollPane);
         parent.setSpacing(10);
 
         setStyle(child1);
         setStyle(child2);
         setStyle(child3);
-        setStyle(child4);
+        scrollPane.setStyle("-fx-border-color: black;-fx-border-radius: 3px ;-fx-border-width: 1px; -fx-border-style: solid; -fx-padding: 10px 10px 10px 10px; -fx-background-color: #C6CBCE;");
         styleClosed(gate1);
         styleClosed(gate2);
         styleClosed(gate3);
@@ -174,17 +180,15 @@ public class ControlCenter extends GridPane {
         vBox.setStyle("-fx-border-color: black;-fx-border-radius: 3px ;-fx-border-width: 1px; -fx-border-style: solid; -fx-padding: 10px 10px 10px 10px; -fx-background-color: #C6CBCE;");
     }
 
-    public void updateGateScannedCards(String gateId){
+    public void updateGateScannedCards(String gateId, int amount){
         VBox vBox = (VBox) this.lookup("#" + gateId);
         TextField textField = (TextField) vBox.getChildren().get(4);
-        int amount = Integer.parseInt(textField.getText());
-        amount++;
         textField.setText(Integer.toString(amount));
     }
 
-    public void enableNodes(VBox vBox, Node... exception){
+    public void enableNodes(VBox vBox, Node exception){
         for (int i = 0; i < vBox.getChildren().size(); i++) {
-            if(vBox.getChildren().get(i) != exception[0])
+            if(vBox.getChildren().get(i) != exception)
                 vBox.getChildren().get(i).setDisable(false);
         }
     }
@@ -226,6 +230,13 @@ public class ControlCenter extends GridPane {
         priceSold += megekregenPrice;
         number.setText(String.valueOf(numberSold));
         price.setText(String.valueOf(priceSold));
+    }
+
+    public void closeMetroStation(){
+        for (int i = 0; i < gates.getChildren().size(); i++) {
+            VBox vBox = (VBox) gates.getChildren().get(i);
+            styleClosed(vBox);
+        }
     }
 
 
