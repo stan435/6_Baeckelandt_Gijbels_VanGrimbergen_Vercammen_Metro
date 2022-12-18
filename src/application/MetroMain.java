@@ -20,10 +20,9 @@ public class MetroMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException, BiffException {
-		MetroFacade metroFacade = new MetroFacade();
-		MetroTicketViewController metroTicketViewController = new MetroTicketViewController(metroFacade);
-		MetroStationViewController metroStationViewController = new MetroStationViewController(metroFacade);
-		AdminView adminView = new AdminView(metroFacade);
+		MetroTicketViewController metroTicketViewController = new MetroTicketViewController();
+		MetroStationViewController metroStationViewController = new MetroStationViewController();
+		AdminView adminView = new AdminView();
 		MetroTicketView metroTicketView = new MetroTicketView(metroTicketViewController);
 		MetroStationView metroStationView = new MetroStationView(metroStationViewController);
 	}

@@ -10,11 +10,10 @@ import view.panels.SetupPane;
 import java.io.IOException;
 
 public class SetupPaneController implements MetroObserver {
-    private final MetroFacade metroFacade;
+    private MetroFacade metroFacade = MetroFacade.getInstance();
     private SetupPane setupPane;
 
-    public SetupPaneController(MetroFacade metroFacade) throws BiffException, IOException {
-        this.metroFacade = metroFacade;
+    public SetupPaneController() throws BiffException, IOException {
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
     }
 

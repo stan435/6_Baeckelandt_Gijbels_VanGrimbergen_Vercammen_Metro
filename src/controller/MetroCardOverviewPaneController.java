@@ -10,11 +10,10 @@ import view.panels.MetroCardOverviewPane;
 import java.io.IOException;
 
 public class MetroCardOverviewPaneController implements MetroObserver {
-    private final MetroFacade metroFacade;
+    private MetroFacade metroFacade = MetroFacade.getInstance();
     private MetroCardOverviewPane metroCardOverviewPane;
 
-    public MetroCardOverviewPaneController(MetroFacade metroFacade) throws BiffException, IOException {
-        this.metroFacade = metroFacade;
+    public MetroCardOverviewPaneController() throws BiffException, IOException {
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
         metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
         metroFacade.registerObeserver(MetroEventsEnum.UPDATE_METROCARD,this);

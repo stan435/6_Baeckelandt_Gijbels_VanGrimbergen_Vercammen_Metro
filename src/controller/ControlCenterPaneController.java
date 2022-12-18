@@ -10,12 +10,11 @@ import view.panels.ControlCenter;
 import java.io.IOException;
 
 public class ControlCenterPaneController implements MetroObserver {
-    private final MetroFacade metroFacade;
+    private MetroFacade metroFacade = MetroFacade.getInstance();
     private ControlCenter controlCenter;
 
 
-    public ControlCenterPaneController(MetroFacade metroFacade){
-        this.metroFacade = metroFacade;
+    public ControlCenterPaneController(){
         metroFacade.registerObeserver(MetroEventsEnum.DEACTIVATE_GATE, this);
         metroFacade.registerObeserver(MetroEventsEnum.Alert_CONTROLCENTER,this);
         metroFacade.registerObeserver(MetroEventsEnum.SCAN_METROCARDS,this);

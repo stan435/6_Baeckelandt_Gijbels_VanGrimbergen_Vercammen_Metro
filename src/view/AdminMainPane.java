@@ -18,11 +18,11 @@ import view.panels.SetupPane;
 import java.io.IOException;
 
 public class AdminMainPane extends BorderPane {
-	public AdminMainPane(MetroFacade metroFacade) throws IOException, BiffException {
+	public AdminMainPane() throws IOException, BiffException {
 	    TabPane tabPane = new TabPane();
-        ControlCenterPaneController controlCenterPaneController = new ControlCenterPaneController(metroFacade);
-        SetupPaneController setupPaneController = new SetupPaneController(metroFacade);
-        MetroCardOverviewPaneController metroCardOverviewPaneController = new MetroCardOverviewPaneController(metroFacade);
+        ControlCenterPaneController controlCenterPaneController = new ControlCenterPaneController();
+        SetupPaneController setupPaneController = new SetupPaneController();
+        MetroCardOverviewPaneController metroCardOverviewPaneController = new MetroCardOverviewPaneController();
 
         SetupPane setupPane = new SetupPane(setupPaneController);
         MetroCardOverviewPane metroCardOverviewPane = new MetroCardOverviewPane(metroCardOverviewPaneController);

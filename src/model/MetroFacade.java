@@ -8,6 +8,7 @@ import model.TicketpriceDecorator.TicketPriceDiscountEnum;
 import model.TicketpriceDecorator.TicketPriceFactory;
 import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
 import model.database.MetroCardDatabase;
+import model.metroGateStates.StateContext;
 import sun.security.util.AuthResources_zh_CN;
 
 import java.io.FileInputStream;
@@ -20,17 +21,25 @@ import java.time.YearMonth;
 import java.util.*;
 
 public class MetroFacade implements Subject {
+    private static volatile MetroFacade metroFacade;
     private final Map<MetroEventsEnum, List<MetroObserver>> observers = new HashMap<>();
     private MetroCardDatabase metroCardDatabase = new MetroCardDatabase();
     private MetroStation metroStation = new MetroStation();
     private TicketPriceFactory ticketPriceFactory = new TicketPriceFactory();
 
 
-    public MetroFacade(){
-            for (MetroEventsEnum e : MetroEventsEnum.values()) {
-                observers.put(e, new ArrayList<MetroObserver>());
-            }
+    private MetroFacade(){
+        for (MetroEventsEnum e : MetroEventsEnum.values()) {
+            observers.put(e, new ArrayList<MetroObserver>());
         }
+    }
+
+    public static MetroFacade getInstance(){
+        if(metroFacade == null){
+            metroFacade = new MetroFacade();
+        }
+        return metroFacade;
+    }
 
     public void openMetroStation() throws BiffException, IOException {
         metroCardDatabase.setStrategy(LoadSaveStrategyFactory.getStrategy());
