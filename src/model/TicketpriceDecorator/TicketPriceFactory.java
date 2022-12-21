@@ -47,6 +47,7 @@ public class TicketPriceFactory {
             toShow = price.getPriceText();
             priceAmount = price.getPrice();
         }
+
         if (items.contains(TicketPriceDiscountEnum.CHRISTMASLEAVEDISCOUNT.toString())) {
             price = new ChristmasLeaveDiscount(price, rides);
             toShow = price.getPriceText();

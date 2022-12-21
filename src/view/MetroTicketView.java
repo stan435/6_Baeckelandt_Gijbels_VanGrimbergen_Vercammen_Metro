@@ -1,13 +1,9 @@
 package view;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import controller.MetroTicketViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -16,10 +12,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
-import model.MetroCard;
-import model.MetroFacade;
-import model.database.MetroCardDatabase;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -39,7 +31,7 @@ public class MetroTicketView {
 	private RadioButton rb3;
 
 
-	public MetroTicketView(MetroTicketViewController metroTicketViewController) throws BiffException, IOException {
+	public MetroTicketView(MetroTicketViewController metroTicketViewController){
 		metroTicketViewController.setView(this);
 		stage.setTitle("METROTICKET VIEW");
 		stage.initStyle(StageStyle.UTILITY);

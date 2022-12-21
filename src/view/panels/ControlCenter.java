@@ -2,28 +2,16 @@ package view.panels;
 
 
 import controller.ControlCenterPaneController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import jxl.read.biff.BiffException;
-import jxl.write.DateTime;
 import jxl.write.WriteException;
-import model.database.MetroCardDatabase;
-
-
 import java.io.IOException;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 public class ControlCenter extends GridPane {
 
@@ -32,7 +20,6 @@ public class ControlCenter extends GridPane {
     private HBox hBox1,hBox2,gates;
     private VBox child1,child2,gate1,gate2,gate3,child3,child4,parent;
     private Button Active1,Deactive1,Active2,Deactive2,Active3,Deactive3,open, close;
-    private MetroCardDatabase metroCardDatabase = new MetroCardDatabase();
     private TextField amount1, amount2, amount3, number, price;
 
     public ControlCenter(ControlCenterPaneController controlCenterPaneController){
@@ -135,6 +122,7 @@ public class ControlCenter extends GridPane {
         alerts = new Label("");
         alerts.setId("alert");
         child4 = new VBox(alertTitel);
+        child4.setFillWidth(true);
 
         ScrollPane scrollPane = new ScrollPane(child4);
         scrollPane.setFitToHeight(false);
@@ -239,25 +227,6 @@ public class ControlCenter extends GridPane {
         }
     }
 
-
-
-/*
-    public ArrayList<Node> createGate(int gateId){
-        ArrayList<Node> nodes = new ArrayList<>();
-        Label gateTitel = new Label("GATE " + gateId + " ACTIVE/INACTIVE (NOG PROGRAMMEREN)");
-        Button activate = new Button("Activate");
-        Button deactivate = new Button("Deactivate");
-        Label scannedCardsLabel = new Label("# scanned cards");
-        TextField scannedCardsAmount = new TextField("0");
-        VBox gate = new VBox(gateTitel,activate,deactivate,scannedCardsLabel,scannedCardsAmount);
-        disableNodes(gate);
-        for (int i = 0; i < gate.getChildren().size(); i++) {
-            nodes.add(gate.getChildren().get(i));
-        }
-        return nodes;
-    }
-
- */
 
 
 }

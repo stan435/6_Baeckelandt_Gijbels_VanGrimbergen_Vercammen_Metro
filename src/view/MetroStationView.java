@@ -3,7 +3,6 @@ package view;
 import controller.MetroStationViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,29 +14,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
-import model.MetroEventsEnum;
-import view.panels.SetupPane;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.GridPane;
-import javafx.scene.control.Button;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 public class MetroStationView {
 	private ObservableList<Integer> metroCardsIDs;

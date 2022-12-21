@@ -6,24 +6,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.geometry.Insets;
-import jxl.read.biff.BiffException;
-import model.database.MetroCardDatabase;
-
-
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -134,7 +120,7 @@ public class SetupPane extends VBox {
             if(list[i].equals("CHRISTMASLEAVEDISCOUNT")){
                 checkBox2.setSelected(true);
             }
-            if(list[i].equals("FREQUENTTRAVELLERDISCOUNT")){
+            if(list[i].equals("FREQUENTTRAVELERDISCOUNT")){
                 checkBox3.setSelected(true);
             }
             if(list[i].equals("AGE64PLUSDISCOUNT")){

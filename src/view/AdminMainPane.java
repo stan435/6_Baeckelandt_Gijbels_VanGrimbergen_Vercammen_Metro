@@ -27,8 +27,6 @@ public class AdminMainPane extends BorderPane {
         SetupPane setupPane = new SetupPane(setupPaneController);
         MetroCardOverviewPane metroCardOverviewPane = new MetroCardOverviewPane(metroCardOverviewPaneController);
         ControlCenter controlCenter = new ControlCenter(controlCenterPaneController);
-	//maak een controlCenterPane aan
-	//maak een setupPane aan
         Tab metroCardOverviewTab = new Tab("Metro cards overview",metroCardOverviewPane);
         Tab controlCenterTab = new Tab("Control Center",controlCenter);
         Tab setupTab = new Tab("Setup", setupPane);

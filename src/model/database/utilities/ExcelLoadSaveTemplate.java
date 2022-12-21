@@ -24,15 +24,6 @@ public class ExcelLoadSaveTemplate {
                 list.get(i).add(String.valueOf(args.get(i).getBeschikbaar()));
                 list.get(i).add(String.valueOf(args.get(i).getGebruikt()));
 
-
-           /*
-                list2.set(j,String.valueOf(args.get(i).getId()));
-                list2.set(j+1,String.valueOf(args.get(i).getDate()));
-                list2.set(j+2,String.valueOf(args.get(i).getInt1()));
-                list2.set(j+3,String.valueOf(args.get(i).getInt2()));
-                list.add(list2);
-
-            */
         }
 
         excelPlugin.save(file,list);
