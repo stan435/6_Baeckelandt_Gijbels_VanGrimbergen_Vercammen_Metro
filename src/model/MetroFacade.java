@@ -81,19 +81,6 @@ public class MetroFacade implements Subject {
         return result;
     }
 
-    public ArrayList<String> getMetroTicketDiscountList() throws IOException {
-        ArrayList<String> list = new ArrayList<>();
-        Properties properties = new Properties();
-        InputStream is = new FileInputStream("./bestanden/settings.properties");
-        properties.load(is);
-        String name = properties.getProperty("discount");
-        String[] list2 = name.split(",");
-        for (int i = 0; i < list2.length; i++) {
-            list.add(list2[i]);
-        }
-        return list;
-    }
-
     public MetroCard getMetroCard(String id){
         return metroCardDatabase.getMetroCard(id);
     }

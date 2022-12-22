@@ -16,10 +16,7 @@ public class MetroTicketViewController implements MetroObserver {
 
     public MetroTicketViewController() throws BiffException, IOException {
         metroFacade.registerObeserver(MetroEventsEnum.OPEN_METROSTATION, this);
-        metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARD,this);
         metroFacade.registerObeserver(MetroEventsEnum.CLOSE_METROSTATION,this);
-        metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARDTICKETS,this);
-
     }
 
 
@@ -32,19 +29,14 @@ public class MetroTicketViewController implements MetroObserver {
         if(MetroEventsEnum.OPEN_METROSTATION.equals(e) ){
             metroTicketView.openMetroStation(metroFacade.getMetroCardIDList());
         }
-        if(MetroEventsEnum.BUY_METROCARD.equals(e)){
-            metroTicketView.updateDropdownIDs(metroFacade.getMetroCardIDList());
-        }
         if(MetroEventsEnum.CLOSE_METROSTATION.equals(e)){
             metroTicketView.closeMetrostation();
-        }
-        if(MetroEventsEnum.BUY_METROCARDTICKETS.equals(e)){
-            metroTicketView.resetForm();
         }
     }
 
     public void buyMetroCards() throws IOException, BiffException {
         metroFacade.buyMetroCards();
+        metroTicketView.updateDropdownIDs(metroFacade.getMetroCardIDList());
     }
 
     public void getPriceAndText(Boolean is26Min, Boolean is64Plus, Boolean isStudent, MetroCard metroCard, int rides) throws IOException, BiffException, WriteException {
@@ -58,7 +50,7 @@ public class MetroTicketViewController implements MetroObserver {
 
     public void confirmRequest(int cardId, String rides, String moneyAmount) throws BiffException, IOException, WriteException {
         metroFacade.buyMetroCardTickets(getMetrocard(Integer.toString(cardId)), rides, moneyAmount);
-
+        metroTicketView.resetForm();
     }
 
 }

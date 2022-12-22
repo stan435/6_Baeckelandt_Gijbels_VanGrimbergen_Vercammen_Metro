@@ -104,6 +104,9 @@ public class MetroStationView {
 			idsgate1.setItems(metroCardsIDs);
 			idsgate2.setItems(metroCardsIDs);
 			idsgate3.setItems(metroCardsIDs);
+			idsgate1.setValue(metroCardsIDs.get(0));
+			idsgate2.setValue(metroCardsIDs.get(0));
+			idsgate3.setValue(metroCardsIDs.get(0));
 	}
 
 	public void setStyleOpen(String id){
@@ -123,6 +126,7 @@ public class MetroStationView {
 		TextField textField =(TextField)  vBox.getChildren().get(5);
 		textField.setText(state[0]);
 	}
+
 	public void enableNodes(VBox vBox,Node exception){
 		for (int i = 0; i < vBox.getChildren().size(); i++) {
 			if(vBox.getChildren().get(i) != exception){

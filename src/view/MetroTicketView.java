@@ -160,6 +160,7 @@ public class MetroTicketView {
 	public void updateDropdownIDs(ArrayList<Integer> ids) {
 		metroCardsIDs = FXCollections.observableArrayList(ids);
 		IDs.setItems(metroCardsIDs);
+		IDs.setValue(metroCardsIDs.get(0));
 	}
 
 	public void openMetroStation(ArrayList<Integer> ids){

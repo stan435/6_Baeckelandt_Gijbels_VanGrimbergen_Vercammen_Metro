@@ -26,6 +26,7 @@ public class TekstLoadSaveTemplate<K,V> {
         }
         return returnMap;
     }
+
     public void save(File file, ArrayList<MetroCard> args) throws BiffException, WriteException, IOException {
         ArrayList<String> list = new ArrayList<>();
         for(int i = 0; i < args.size();i++) {

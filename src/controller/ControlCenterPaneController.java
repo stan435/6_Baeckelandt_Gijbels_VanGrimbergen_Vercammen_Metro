@@ -20,8 +20,6 @@ public class ControlCenterPaneController implements MetroObserver {
         metroFacade.registerObeserver(MetroEventsEnum.SCAN_METROCARDS,this);
         metroFacade.registerObeserver(MetroEventsEnum.SCAN_METROCARDS_SUCCESFULL,this);
         metroFacade.registerObeserver(MetroEventsEnum.BUY_METROCARDTICKETS,this);
-        metroFacade.registerObeserver(MetroEventsEnum.CLOSE_METROSTATION,this);
-
     }
 
     public void setView(ControlCenter controlCenter){
@@ -36,6 +34,7 @@ public class ControlCenterPaneController implements MetroObserver {
                 controlCenter.styleOpenOnId(args[1]);
             }
         }
+
         if(MetroEventsEnum.Alert_CONTROLCENTER.equals(e)){
             controlCenter.addAllert(args[0]);
         }
@@ -44,9 +43,6 @@ public class ControlCenterPaneController implements MetroObserver {
         }
         if(MetroEventsEnum.BUY_METROCARDTICKETS.equals(e)){
             controlCenter.updateTicketNumberFields(args[0], args[1]);
-        }
-        if(MetroEventsEnum.CLOSE_METROSTATION.equals(e)){
-            controlCenter.closeMetroStation();
         }
 
     }
@@ -58,6 +54,7 @@ public class ControlCenterPaneController implements MetroObserver {
 
     public void closeMetroStation() throws BiffException, IOException, WriteException {
         metroFacade.closeMetroStation();
+        controlCenter.closeMetroStation();
     }
 
     public void activateGate(int gateId) throws BiffException, IOException {
