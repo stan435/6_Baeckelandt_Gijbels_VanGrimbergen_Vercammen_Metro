@@ -1,8 +1,6 @@
 package view.panels;
 
 import controller.SetupPaneController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
@@ -19,11 +17,11 @@ public class SetupPane extends VBox {
     private Button save;
     private Button saveDiscount;
     private CheckBox checkBox1,checkBox2,checkBox3,checkBox4;
-    private ClickHandler clickHandler;
+
 
     public SetupPane(SetupPaneController setupPaneController) {
         setupPaneController.setView(this);
-        clickHandler = new ClickHandler();
+
 
         VBox main = new VBox();
         main.setSpacing(10);
@@ -38,7 +36,19 @@ public class SetupPane extends VBox {
         strategyBox.setValue("Tekst");
 
         save = new Button("save");
-        save.setOnAction(clickHandler);
+        save.setOnAction(event -> {
+            Properties properties = new Properties();
+            try {
+                FileInputStream os = new FileInputStream("./bestanden/settings.properties");
+                properties.load(os);
+                properties.setProperty("strategy", strategyBox.getValue());
+                FileOutputStream naam = new FileOutputStream("./bestanden/settings.properties");
+                properties.store(naam,"Strategy");
+                os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         save.setAlignment(Pos.CENTER_RIGHT);
 
         VBox discount = new VBox();
@@ -131,24 +141,6 @@ public class SetupPane extends VBox {
 
     public void setStyle(VBox vBox){
         vBox.setStyle("-fx-border-color: black;-fx-border-radius: 3px ;-fx-border-width: 1px; -fx-border-style: solid; -fx-padding: 10px 200px 10px 10px; -fx-background-color: #C6CBCE;");
-    }
-
-    private class ClickHandler implements EventHandler<ActionEvent> {
-
-        @Override
-        public void handle(ActionEvent event) {
-            Properties properties = new Properties();
-            try {
-                FileInputStream os = new FileInputStream("./bestanden/settings.properties");
-                properties.load(os);
-                properties.setProperty("strategy", strategyBox.getValue());
-                FileOutputStream naam = new FileOutputStream("./bestanden/settings.properties");
-                properties.store(naam,"Strategy");
-                os.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
 
